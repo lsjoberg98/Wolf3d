@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/17 13:53:05 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/08/20 14:46:17 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define WIN_WIDTH		(1280)
 # define WIN_HEIGHT		(720)
+# define TEX_WIDTH		(64)
+# define TEX_HEIGHT		(64)
 
 typedef struct	s_mlx
 {
@@ -31,6 +33,16 @@ typedef struct	s_mlx
 	void	*win;
 	void	*img;
 }				t_mlx;
+
+typedef struct	s_cam
+{
+	float	posX;
+	float	posY;
+	float	moveX;
+	float	moveY;
+	float	angle;
+}				t_cam;
+
 
 typedef struct	s_img
 {
@@ -44,9 +56,7 @@ typedef struct s_w3d
 {
 	t_mlx	mlx;
 	t_img	img;
+	t_cam	cam;
 }				t_w3d;
-
-
-
 
 #endif
