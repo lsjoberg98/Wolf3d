@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/24 17:05:14 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/08/26 15:10:42 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@
 # define TEX_WIDTH		(64)
 # define TEX_HEIGHT		(64)
 
+# define A_ALIASING		(0.0050)
+# define SPD_WALK		(1.0000)
+# define SPD_SPRINT		(2.0000)
+# define SPD_MOVE		(0.0750)
+# define SPD_STRAFE		(0.0150)
+
+# define FT_ABS(x)			(((x) < 0) ? -(x) : (x))
+
 extern int		g_map[25][25];
 
 typedef struct	s_mlx
@@ -45,10 +53,20 @@ typedef struct	s_cam
 	float	angle;
 }				t_cam;
 
+typedef struct	s_key
+{
+	int		debug;
+	int		move_up;
+	int		move_down;
+	int		move_left;
+	int		move_right;
+	int		rotate_left;
+	int		rotate_right;
+}				t_key;
 
 typedef struct	s_img
 {
-	int	*data;
+	int		*data;
 	int		size;
 	int		endian;
 	int		pxc;
@@ -68,11 +86,14 @@ typedef struct s_w3d
 	t_img	img;
 	t_cam	cam;
 	t_grid	grid;
+	t_key	key;
 }				t_w3d;
 
-int			main(void);
 void		set_map(t_w3d *w);
 float		raycast(t_w3d *w, int *color);
-void		w3d_set_collision(t_w3d *w);
+void		set_collision(t_w3d *w);
+void		set_movement(t_w3d *w);
+void		set_hooks(t_w3d *w);
+void		set_debug(t_w3d *w);
 
 #endif

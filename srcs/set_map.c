@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/24 17:12:41 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/08/26 15:06:16 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		draw_grids(t_w3d *w)
 	float	ray;
 
 	i = 0;
-	w->grid.angle = (w->cam.angle / 180.00) * 3.141592;
+	w->grid.angle = (w->cam.angle / 180.00) * M_PI;
 	while (i < WIN_WIDTH)
 	{
 		tmp_y = ((WIN_WIDTH / 2) - (float)i) / WIN_WIDTH;
@@ -76,5 +76,8 @@ void		set_map(t_w3d *w)
 {
 	draw_background(w);
 	draw_grids(w);
+	set_collision(w);
 	mlx_put_image_to_window(w->mlx.init, w->mlx.win, w->mlx.img, 0, 0);
+	if (w->key.debug == 1)
+		set_debug(w);
 }
