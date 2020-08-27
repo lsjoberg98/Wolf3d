@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/26 15:10:42 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/08/27 14:31:15 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define SPD_WALK		(1.0000)
 # define SPD_SPRINT		(2.0000)
 # define SPD_MOVE		(0.0750)
-# define SPD_STRAFE		(0.0150)
+# define SPD_STRAFE		(0.0350)
 
 # define FT_ABS(x)			(((x) < 0) ? -(x) : (x))
 
