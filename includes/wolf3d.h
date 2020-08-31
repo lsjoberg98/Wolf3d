@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/27 14:31:15 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/08/31 12:54:57 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
+# include <stdio.h> //remove this when done
+# include <fcntl.h> // added for fd args
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -34,8 +36,6 @@
 # define SPD_STRAFE		(0.0350)
 
 # define FT_ABS(x)			(((x) < 0) ? -(x) : (x))
-
-extern int		g_map[25][25];
 
 typedef struct	s_mlx
 {
@@ -77,6 +77,9 @@ typedef	struct	s_grid
 	float	x;
 	float	y;
 	float	angle;
+	int		height;
+	int		width;
+	int		**matrix;
 }				t_grid;
 
 
@@ -89,6 +92,8 @@ typedef struct s_w3d
 	t_key	key;
 }				t_w3d;
 
+int			ft_count_words(const char *str, char c);
+void		read_map(char *file_name, t_w3d *w);
 void		set_map(t_w3d *w);
 float		raycast(t_w3d *w, int *color);
 void		set_collision(t_w3d *w);
