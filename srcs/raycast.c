@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:38:09 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/24 16:55:09 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/08/31 12:40:14 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ float		raycast(t_w3d *w, int *color)
 	raycast = 1.00;
 	x = w->cam.posX + (raycast * (w->grid.x - w->cam.posX));
 	y = w->cam.posY + (raycast * (w->grid.y - w->cam.posY));
-	while (g_map[x][y] == 0)
+	while (w->grid.matrix[x][y] == 0)
 	{
 		x = w->cam.posX + (raycast * (w->grid.x - w->cam.posX));
 		y = w->cam.posY + (raycast * (w->grid.y - w->cam.posY));
 		raycast += 0.0050;
 	}
-	color_grid(g_map[x][y], color);
+	color_grid(w->grid.matrix[x][y], color);
 	return (raycast);
 }

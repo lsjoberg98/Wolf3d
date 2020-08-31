@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+         #
+#    By: khakala <khakala@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/21 15:56:04 by jaleman           #+#    #+#              #
-#    Updated: 2020/08/26 14:57:11 by lsjoberg         ###   ########.fr        #
+#    Updated: 2020/08/31 12:32:47 by khakala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MINLBX_DIR = ./minilibx/
 
 # Source files and object files
 SRC_FILES = main.c set_map.c raycast.c collision.c set_hooks.c set_movement.c \
-			debugger.c
+			debugger.c read_map.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # Paths
