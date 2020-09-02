@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/31 15:52:29 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/01 12:27:27 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ typedef	struct	s_grid
 
 typedef struct	s_text
 {
-	int		width;
-	int		height;
+	long	width;
+	long	height;
+	char	*textures;
 }				t_text;
 
 
