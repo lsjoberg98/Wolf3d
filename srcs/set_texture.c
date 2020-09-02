@@ -6,11 +6,19 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 15:49:47 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/01 13:21:57 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/02 11:02:12 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/wolf3d.h"
+
+int			get_color(t_w3d *w)
+{
+	int		texwidth;
+	int		tex;
+
+	texwidth = w->tex.width / 6;
+}
 
 unsigned char	read_text(char *filename, t_w3d *w)
 {
