@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/31 12:54:57 by khakala          ###   ########.fr       */
+/*   Updated: 2020/09/01 12:27:27 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define A_ALIASING		(0.0050)
 # define SPD_WALK		(1.0000)
 # define SPD_SPRINT		(2.0000)
-# define SPD_MOVE		(0.0750)
-# define SPD_STRAFE		(0.0350)
+# define SPD_MOVE		(0.2)
+# define SPD_STRAFE		(0.0750)
 
 # define FT_ABS(x)			(((x) < 0) ? -(x) : (x))
 
@@ -82,6 +82,14 @@ typedef	struct	s_grid
 	int		**matrix;
 }				t_grid;
 
+typedef struct	s_text
+{
+	long	width;
+	long	height;
+	char	*textures;
+}				t_text;
+
+
 
 typedef struct s_w3d
 {
@@ -90,6 +98,7 @@ typedef struct s_w3d
 	t_cam	cam;
 	t_grid	grid;
 	t_key	key;
+	t_text	tex;
 }				t_w3d;
 
 int			ft_count_words(const char *str, char c);
