@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/26 15:06:16 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/03 13:27:12 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void		draw_grids(t_w3d *w)
 		w->grid.y = sin(w->grid.angle) + tmp_y * cos(w->grid.angle);
 		w->grid.x += w->cam.posX;
 		w->grid.y += w->cam.posY;
+		calc_dist_init(w);
 		ray = raycast(w, &color);
 		put_pixel(w, color, i, ray);
 		i++;
@@ -57,7 +58,7 @@ static void		draw_grids(t_w3d *w)
 
 static void		draw_background(t_w3d *w)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (i < (w->img.size * WIN_HEIGHT / 2))
