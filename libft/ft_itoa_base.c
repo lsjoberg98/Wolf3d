@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 23:00:45 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/01/23 23:00:51 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:06:43 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	length(unsigned long long value, int base)
 	int		len;
 
 	len = 1;
-	if (value < 0)
+	if (value <= 0)
 		len++;
 	while (value /= base)
 		len++;

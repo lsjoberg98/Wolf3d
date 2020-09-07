@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/01 12:27:27 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/03 13:26:17 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "keys.h"
 # include "mouse.h"
 
-# define WIN_WIDTH		(1280)
-# define WIN_HEIGHT		(720)
+# define WIN_WIDTH		(1024)
+# define WIN_HEIGHT		(768)
 # define TEX_WIDTH		(64)
 # define TEX_HEIGHT		(64)
 
@@ -70,6 +70,7 @@ typedef struct	s_img
 	int		size;
 	int		endian;
 	int		pxc;
+	int		x;
 }				t_img;
 
 typedef	struct	s_grid
@@ -89,7 +90,29 @@ typedef struct	s_text
 	char	*textures;
 }				t_text;
 
+typedef struct	s_side
+{
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	camera;
+	double	lookposx;
+	double	lookposy;
+	double	lookdirx;
+	double	lookdiry;
+	int		mapx;
+	int		mapy;
+	int		stepx;
+	int		stepy;
+	int		wallhit;
+	int		side;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistX;
+	double	deltadistY;
 
+}				t_side;
 
 typedef struct s_w3d
 {
@@ -99,8 +122,11 @@ typedef struct s_w3d
 	t_grid	grid;
 	t_key	key;
 	t_text	tex;
+	t_side	side;
+
 }				t_w3d;
 
+void	calc_dist_init(t_w3d *w);
 int			ft_count_words(const char *str, char c);
 void		read_map(char *file_name, t_w3d *w);
 void		set_map(t_w3d *w);
