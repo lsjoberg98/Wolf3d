@@ -3,40 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/03 13:27:12 by khakala          ###   ########.fr       */
+/*   Updated: 2020/09/08 18:35:10 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	put_pixel(t_w3d *w, int color, int x, float ray)
-{
-	int		i;
-	int		j;
-	int		y;
+// static void	put_pixel(t_w3d *w, int color, int x, float ray)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		y;
 
-	i = 0;
-	y = ((WIN_HEIGHT / 2) * w->img.size) + (x * w->img.pxc / 8);
-	while (i < (WIN_HEIGHT / (2 * ray)))
+// 	i = 0;
+// 	y = ((WIN_HEIGHT / 2) * w->img.size) + (x * w->img.pxc / 8);
+// 	while (i < (WIN_HEIGHT / (2 * ray)))
+// 	{
+// 		j = 0;
+// 		while (j < (w->img.pxc / 8))
+// 		{
+// 			w->img.data[(j + y - (i * w->img.size)) / 4] = color;
+// 			w->img.data[(j + y + (i * w->img.size)) / 4] = color;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
+void			draw_point(t_w3d *w, float height, int start)
+{
+	int				i;
+	unsigned char	*color;
+	// float			darken;
+
+	i = (w->d3.x * 4) + (w->d3.y * w->img.size);
+	if (w->d3.z < 255)
 	{
-		j = 0;
-		while (j < (w->img.pxc / 8))
-		{
-			w->img.data[(j + y - (i * w->img.size)) / 4] = color;
-			w->img.data[(j + y + (i * w->img.size)) / 4] = color;
-			j++;
-		}
-		i++;
+		color = get_color(w, height, start);
 	}
+	else
+	{
+		w->img.data[i] = (w->d3.z == 255) ? 0x30 * 5 : 0;
+		w->img.data[++i] = (w->d3.z == 255) ? 0x30 * 5 : 0;
+		w->img.data[++i] = (w->d3.z == 255) ? 0x30 * 5 : 0;
+		return ;
+	}
+	if (w->d3.x > 0 && w->d3.y > 0 && w->d3.x < WIN_WIDTH && w->d3.y < WIN_HEIGHT)
+	{
+		w->img.data[i] = color[0];
+		w->img.data[++i] = color[0];
+		w->img.data[++i] = color[0];
+	}
+	
 }
 
 static void		draw_grids(t_w3d *w)
 {
 	int		i;
-	int		color;
 	float	tmp_y;
 	float	ray;
 
@@ -49,33 +75,35 @@ static void		draw_grids(t_w3d *w)
 		w->grid.y = sin(w->grid.angle) + tmp_y * cos(w->grid.angle);
 		w->grid.x += w->cam.posX;
 		w->grid.y += w->cam.posY;
-		calc_dist_init(w);
-		ray = raycast(w, &color);
-		put_pixel(w, color, i, ray);
+		ray = raycast(w);
+		calc_dist_init(w, i);
+		
+		// put_pixel(w, color, i, ray);
 		i++;
 	}
 }
 
-static void		draw_background(t_w3d *w)
-{
-	int i;
+// static void		draw_background(t_w3d *w)
+// {
+// 	int i;
 
-	i = 0;
-	while (i < (w->img.size * WIN_HEIGHT / 2))
-	{
-		w->img.data[i / 4] = 0xffffff;
-		i++;
-	}
-	while (i < (w->img.size * WIN_HEIGHT))
-	{
-		w->img.data[i / 4] =  0xDC143C;
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < (w->img.size * WIN_HEIGHT / 2))
+// 	{
+// 		w->img.data[i / 4] = 0xffffff;
+// 		i++;
+// 	}
+// 	while (i < (w->img.size * WIN_HEIGHT))
+// 	{
+// 		w->img.data[i / 4] =  0xDC143C;
+// 		i++;
+// 	}
+// }
 
 void		set_map(t_w3d *w)
 {
-	draw_background(w);
+	load_textures(w);
+	// draw_background(w);
 	draw_grids(w);
 	set_collision(w);
 	mlx_put_image_to_window(w->mlx.init, w->mlx.win, w->mlx.img, 0, 0);
