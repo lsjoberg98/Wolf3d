@@ -6,32 +6,32 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/08 18:35:10 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/09 12:11:16 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-// static void	put_pixel(t_w3d *w, int color, int x, float ray)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		y;
+static void	put_pixel(t_w3d *w, int color, int x, float ray)
+{
+	int		i;
+	int		j;
+	int		y;
 
-// 	i = 0;
-// 	y = ((WIN_HEIGHT / 2) * w->img.size) + (x * w->img.pxc / 8);
-// 	while (i < (WIN_HEIGHT / (2 * ray)))
-// 	{
-// 		j = 0;
-// 		while (j < (w->img.pxc / 8))
-// 		{
-// 			w->img.data[(j + y - (i * w->img.size)) / 4] = color;
-// 			w->img.data[(j + y + (i * w->img.size)) / 4] = color;
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+	i = 0;
+	y = ((WIN_HEIGHT / 2) * w->img.size) + (x * w->img.pxc / 8);
+	while (i < (WIN_HEIGHT / (2 * ray)))
+	{
+		j = 0;
+		while (j < (w->img.pxc / 8))
+		{
+			w->img.data[(j + y - (i * w->img.size)) / 4] = color;
+			w->img.data[(j + y + (i * w->img.size)) / 4] = color;
+			j++;
+		}
+		i++;
+	}
+}
 
 void			draw_point(t_w3d *w, float height, int start)
 {
@@ -46,9 +46,9 @@ void			draw_point(t_w3d *w, float height, int start)
 	}
 	else
 	{
-		w->img.data[i] = (w->d3.z == 255) ? 0x30 * 5 : 0;
-		w->img.data[++i] = (w->d3.z == 255) ? 0x30 * 5 : 0;
-		w->img.data[++i] = (w->d3.z == 255) ? 0x30 * 5 : 0;
+		w->img.data[i] = (w->d3.z == 255) ? 0x30 : 0;
+		w->img.data[++i] = (w->d3.z == 255) ? 0x30 : 0;
+		w->img.data[++i] = (w->d3.z == 255) ? 0x30 : 0;
 		return ;
 	}
 	if (w->d3.x > 0 && w->d3.y > 0 && w->d3.x < WIN_WIDTH && w->d3.y < WIN_HEIGHT)

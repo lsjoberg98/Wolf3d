@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/08 18:35:21 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/09 11:56:36 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ typedef struct	s_key
 
 typedef struct	s_img
 {
-	int		*data;
+	char		*data;
 	int		size;
 	int		endian;
+	char	*pixel_img;
 	int		pxc;
 	int		x;
 }				t_img;
