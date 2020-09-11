@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:45:57 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/09 11:57:06 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/11 12:47:21 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int ac, char **argv)
 	w->mlx.win = mlx_new_window(w->mlx.init, WIN_WIDTH, \
 		WIN_HEIGHT, "Wolfenstein3D");
 	w->mlx.img = mlx_new_image(w->mlx.init, WIN_WIDTH, WIN_HEIGHT);
-	w->img.data = mlx_get_data_addr(w->mlx.img, \
+	w->img.data =(int *)mlx_get_data_addr(w->mlx.img, \
 		&w->img.pxc, &w->img.size, &w->img.endian);
 	w = init_values(w);
 	set_hooks(w);

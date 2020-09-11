@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 15:49:47 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/08 18:24:08 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:05:04 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	find_sheet(t_w3d *w, int z)
 	return (ret);
 }
 
-unsigned char	*get_color(t_w3d *w, float height, int start)
+int			*get_color(t_w3d *w, float height, int start)
 {
 	double	wallx;
 	int		texwidth;
@@ -56,12 +56,12 @@ unsigned char	*get_color(t_w3d *w, float height, int start)
 		+ find_sheet(w, w->d3.z));
 }
 
-unsigned char	*read_text(char *filename, t_text *tex)
+char	*read_text(char *filename, t_text *tex)
 {
-	unsigned char	*data;
+	char	*data;
 	FILE			*f;
-	unsigned char	info[54];
-	unsigned int	size;
+	char	info[54];
+	int	size;
 
 	f = fopen(filename, "rb");
 	if (f <= 0)
@@ -71,7 +71,7 @@ unsigned char	*read_text(char *filename, t_text *tex)
 	tex->width = *(int*)&info[18];
 	tex->height = *(int*)&info[22];
 	size = 3 * tex->width * tex->height;
-	data = (unsigned char *)ft_memalloc(size);
+	data = ft_memalloc(size);
 	fread(data, 1, size, f);
 	fclose(f);
 	return (data);
@@ -79,7 +79,7 @@ unsigned char	*read_text(char *filename, t_text *tex)
 
 void			load_textures(t_w3d *w)
 {
-	w->side.textures = read_text("../resources/sheet.bmp", &w->tex);
+	w->side.textures =(int *)read_text("resources/sheet.bmp", &w->tex);
 }
 
 void			calc_perp(t_w3d *w, int i)
@@ -98,7 +98,7 @@ void			calc_perp(t_w3d *w, int i)
 	draw_vert(w, i, drawstart, lineheight);
 }
 
-void		draw_vert(t_w3d *w, int x, int y, int height)
+void		draw_vert(t_w3d *w, int x, int start, int height)
 {
 	int		i;
 
@@ -107,12 +107,12 @@ void		draw_vert(t_w3d *w, int x, int y, int height)
 	while (++i < WIN_HEIGHT)
 	{
 		w->d3.y = i;
-		if (i < y)
+		if (i < start)
 			w->d3.z = 256;
-		else if (i < y + height)
+		else if (i < start + height)
 			w->d3.z = w->grid.matrix[w->side.mapx][w->side.mapy];
 		else
 			w->d3.z = 255;
-		draw_point(w, height, y);
+		put_pixel(w, x, height, start);
 	}
 }

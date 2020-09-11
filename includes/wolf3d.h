@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/09 11:56:36 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:04:37 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_cam
 	float	moveX;
 	float	moveY;
 	float	angle;
+	float	ray;
 }				t_cam;
 
 typedef struct	s_key
@@ -66,7 +67,7 @@ typedef struct	s_key
 
 typedef struct	s_img
 {
-	char		*data;
+	int		*data;
 	int		size;
 	int		endian;
 	char	*pixel_img;
@@ -119,7 +120,7 @@ typedef struct	s_side
 	double	deltadistX;
 	double	deltadistY;
 	double	perpwalldist;
-	unsigned char	*textures;
+	int		*textures;
 }				t_side;
 
 typedef struct s_w3d
@@ -135,7 +136,7 @@ typedef struct s_w3d
 }				t_w3d;
 
 void		draw_vert(t_w3d *w, int x, int y, int height);
-unsigned char	*get_color(t_w3d *w, float height, int start);
+int			*get_color(t_w3d *w, float height, int start);
 void		calc_perp(t_w3d *w, int i);
 void		calc_dist_init(t_w3d *w, int i);
 int			ft_count_words(const char *str, char c);
@@ -148,5 +149,6 @@ void		set_hooks(t_w3d *w);
 void		set_debug(t_w3d *w);
 void		draw_point(t_w3d *w, float height, int start);
 void		load_textures(t_w3d *w);
+void		put_pixel(t_w3d *w, int x, int height, int start);
 
 #endif

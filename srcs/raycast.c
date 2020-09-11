@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:38:09 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/08 18:34:58 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/09/11 12:27:28 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	calc_side(t_w3d *w)
 
 void	calc_dist_init(t_w3d *w, int i) 
 {
-	w->side.camera = 2 * 1 / (double)WIN_WIDTH - 1;
+	w->side.camera = 2 * i / (double)WIN_WIDTH - 1;
 	w->side.lookposx = w->cam.posX;
 	w->side.lookposy = w->cam.posY;
 	w->side.lookdirx = w->side.dirx + w->side.planex * w->side.camera;
