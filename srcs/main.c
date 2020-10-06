@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:45:57 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/03 12:02:51 by khakala          ###   ########.fr       */
+/*   Updated: 2020/10/06 20:52:33 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static	t_w3d		*init_values(t_w3d *w)
 	w->cam.angle = 110.00;
 	w->cam.moveX = 0.00;
 	w->cam.moveY = 0.00;
+	import_textures(w);
 	return (w);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/03 13:27:12 by khakala          ###   ########.fr       */
+/*   Updated: 2020/10/06 19:27:00 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void		draw_grids(t_w3d *w)
 	int		color;
 	float	tmp_y;
 	float	ray;
+	int		height;
+	int		start;
 
 	i = 0;
 	w->grid.angle = (w->cam.angle / 180.00) * M_PI;
@@ -49,9 +51,12 @@ static void		draw_grids(t_w3d *w)
 		w->grid.y = sin(w->grid.angle) + tmp_y * cos(w->grid.angle);
 		w->grid.x += w->cam.posX;
 		w->grid.y += w->cam.posY;
-		calc_dist_init(w);
-		ray = raycast(w, &color);
-		put_pixel(w, color, i, ray);
+		calc_dist_init(w, i);
+		height = (int)(WIN_HEIGHT / w->side.perpwalldist);
+		start = -height / 2 + WIN_HEIGHT / 2;
+		draw_vert(w, i, start, height);
+		// ray = raycast(w, &color);
+		// put_pixel(w, color, i, ray);
 		i++;
 	}
 }

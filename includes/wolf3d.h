@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/03 13:26:17 by khakala          ###   ########.fr       */
+/*   Updated: 2020/10/06 20:56:30 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define SPD_STRAFE		(0.0750)
 
 # define FT_ABS(x)			(((x) < 0) ? -(x) : (x))
+# define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+# define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
 typedef struct	s_mlx
 {
@@ -85,9 +87,9 @@ typedef	struct	s_grid
 
 typedef struct	s_text
 {
-	long	width;
-	long	height;
-	char	*textures;
+	void	*wt;
+	void	*fl;
+	void	*cl;
 }				t_text;
 
 typedef struct	s_side
@@ -111,7 +113,7 @@ typedef struct	s_side
 	double	sidedisty;
 	double	deltadistX;
 	double	deltadistY;
-
+	double	perpwalldist;
 }				t_side;
 
 typedef struct s_w3d
@@ -123,10 +125,19 @@ typedef struct s_w3d
 	t_key	key;
 	t_text	tex;
 	t_side	side;
-
 }				t_w3d;
 
-void	calc_dist_init(t_w3d *w);
+typedef struct	s_3d
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_3d;
+
+void		draw_point(t_w3d *w, t_3d p, float height, int start);
+void		draw_vert(t_w3d *w, int x, int start, int height);
+void		calc_dist(t_w3d *w);
+void		calc_dist_init(t_w3d *w, int i);
 int			ft_count_words(const char *str, char c);
 void		read_map(char *file_name, t_w3d *w);
 void		set_map(t_w3d *w);

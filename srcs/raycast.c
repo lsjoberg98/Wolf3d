@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:38:09 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/09/03 13:28:43 by khakala          ###   ########.fr       */
+/*   Updated: 2020/10/06 19:51:39 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void	calc_side(t_w3d *w)
 	}
 }
 
-void	calc_dist_init(t_w3d *w)
+void	calc_dist_init(t_w3d *w, int i)
 {
-	w->side.camera = 2 * 1 / (double)WIN_WIDTH - 1;
+	w->side.camera = 2 * i / (double)WIN_WIDTH - 1;
 	w->side.lookposx = w->cam.posX;
 	w->side.lookposy = w->cam.posY;
 	w->side.lookdirx = w->side.dirx + w->side.planex * w->side.camera;
@@ -122,4 +122,35 @@ void	calc_dist_init(t_w3d *w)
 	w->side.mapy = (int)w->side.lookposy;
 	calc_direction(w);
 	calc_side(w);
+	calc_dist(w);
+}
+
+void	calc_dist(t_w3d *w)
+{	
+	if (w->side.side == 0)
+		w->side.perpwalldist = (w->side.mapx - w->side.lookposx +
+			(1 - w->side.stepx) / 2) / w->side.lookdirx;
+	else
+		w->side.perpwalldist = (w->side.mapy - w->side.lookposy +
+			(1 - w->side.stepy) / 2) / w->side.lookdiry;
+}
+
+void	draw_vert(t_w3d *w, int x, int start, int height)
+{
+	int		i;
+	t_3d	point;
+
+	i = -1;
+	point.x = x;
+	while (++i < WIN_HEIGHT)
+	{
+		point.y = i;
+		if (i < start)
+			point.z = 256;
+		else if (i < start + height)
+			point.z = w->grid.matrix[w->side.mapx][w->side.mapy];
+		else
+			point.z = 255;
+		draw_point(w, point, height, start);
+	}
 }
