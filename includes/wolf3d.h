@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/06 20:56:30 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/08 23:29:57 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ typedef	struct	s_grid
 
 typedef struct	s_text
 {
-	void	*wt;
-	void	*fl;
-	void	*cl;
+	char	**wt;
+	char	**fl;
+	char	**cl;
 }				t_text;
 
 typedef struct	s_side
@@ -116,6 +116,13 @@ typedef struct	s_side
 	double	perpwalldist;
 }				t_side;
 
+typedef struct	s_3d
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_3d;
+
 typedef struct s_w3d
 {
 	t_mlx	mlx;
@@ -125,14 +132,10 @@ typedef struct s_w3d
 	t_key	key;
 	t_text	tex;
 	t_side	side;
+	t_3d	cord;
 }				t_w3d;
 
-typedef struct	s_3d
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_3d;
+
 
 void		draw_point(t_w3d *w, t_3d p, float height, int start);
 void		draw_vert(t_w3d *w, int x, int start, int height);
@@ -146,5 +149,7 @@ void		set_collision(t_w3d *w);
 void		set_movement(t_w3d *w);
 void		set_hooks(t_w3d *w);
 void		set_debug(t_w3d *w);
+void		import_textures(t_w3d *w);
+void		draw_point(t_w3d *w, t_3d t, float height, int start);
 
 #endif

@@ -6,22 +6,42 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 20:20:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/06 21:28:44 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/08 23:51:07 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
+void	draw_vert(t_w3d *w, int x, int start, int height)
+{
+	int		i;
+	t_3d	point;
+
+	i = -1;
+	point.x = x;
+	while (++i < WIN_HEIGHT)
+	{
+		point.y = i;
+		if (i < start)
+			point.z = 256;
+		else if (i < start + height)
+			point.z = w->grid.matrix[w->side.mapx][w->side.mapy];
+		else
+			point.z = 255;
+		draw_point(w, point, height, start);
+	}
+}
+
 void		draw_point(t_w3d *w, t_3d p, float height, int start)
 {
 	int				i;
-	unsigned char	*color;
+	int				*color;
 	float			darken;
 
 	i = (p.x * 4) + (p.y * w->img.size);
 	if (p.z < 255)
 	{
-		color = get_color(w, p, height, start);
+		color = get_color(w, color, height, start);
 		darken = MAX(0, MIN(1, height / WIN_HEIGHT - 0.05));
 	}
 	else
@@ -41,7 +61,7 @@ void		draw_point(t_w3d *w, t_3d p, float height, int start)
 	}
 }
 
-static unsigned char	*get_color(t_w3d *w, t_3d p, float height, int start)
+static unsigned char	*get_color(t_w3d *w, int color, float height, int start)
 {
 	double	wallx;
 	int		texwidth;
@@ -55,4 +75,10 @@ static unsigned char	*get_color(t_w3d *w, t_3d p, float height, int start)
 		wallx = w->side.lookposx + w->side.perpwalldist * w->side.lookdirx;
 	wallx -= floor(wallx);
 	texx = (int)(wallx * (double)texwidth);
+	if (w->side.side == 0 && w->side.lookdirx > 0)
+		texx = texwidth - texx - 1;
+	if (w->side.side == 1 && w->side.lookdiry < 0)
+		texx = texwidth - texx - 1;
+	y = TEX_HEIGHT - ((w->cord.y - start) / height * 64);
+	return (color);
 }

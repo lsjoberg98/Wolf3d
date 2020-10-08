@@ -6,39 +6,39 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/06 19:27:00 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:33:31 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	put_pixel(t_w3d *w, int color, int x, float ray)
-{
-	int		i;
-	int		j;
-	int		y;
+// static void	put_pixel(t_w3d *w, int color, int x, float ray)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		y;
 
-	i = 0;
-	y = ((WIN_HEIGHT / 2) * w->img.size) + (x * w->img.pxc / 8);
-	while (i < (WIN_HEIGHT / (2 * ray)))
-	{
-		j = 0;
-		while (j < (w->img.pxc / 8))
-		{
-			w->img.data[(j + y - (i * w->img.size)) / 4] = color;
-			w->img.data[(j + y + (i * w->img.size)) / 4] = color;
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	y = ((WIN_HEIGHT / 2) * w->img.size) + (x * w->img.pxc / 8);
+// 	while (i < (WIN_HEIGHT / (2 * ray)))
+// 	{
+// 		j = 0;
+// 		while (j < (w->img.pxc / 8))
+// 		{
+// 			w->img.data[(j + y - (i * w->img.size)) / 4] = color;
+// 			w->img.data[(j + y + (i * w->img.size)) / 4] = color;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 static void		draw_grids(t_w3d *w)
 {
 	int		i;
-	int		color;
+	// int		color;
 	float	tmp_y;
-	float	ray;
+	// float	ray;
 	int		height;
 	int		start;
 
