@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/08 23:29:57 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:01:09 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,33 @@ typedef struct	s_side
 	double	deltadistX;
 	double	deltadistY;
 	double	perpwalldist;
+	double	buffer[WIN_WIDTH];
 }				t_side;
+
+typedef struct	s_ray
+{
+	int		height;
+	int		start;
+	int		drawend;
+	int		x;
+	int		y;
+	double	wallx;
+	int		texx;
+	int		texy;
+
+	double	floorxwall;
+	double	floorywall;
+	double	distwall;
+	double	distplayer;
+	double	currentdist;
+	double	weight;
+	double	floorx;
+	double	floory;
+
+	int		floortexx;
+	int		floortexy;
+}				t_ray;
+
 
 typedef struct	s_3d
 {
@@ -133,6 +159,7 @@ typedef struct s_w3d
 	t_text	tex;
 	t_side	side;
 	t_3d	cord;
+	t_ray	ray;
 }				t_w3d;
 
 
@@ -151,5 +178,6 @@ void		set_hooks(t_w3d *w);
 void		set_debug(t_w3d *w);
 void		import_textures(t_w3d *w);
 void		draw_point(t_w3d *w, t_3d t, float height, int start);
+void		draw_ray(t_w3d *w, int i);
 
 #endif

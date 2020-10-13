@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:45:57 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/09 00:40:19 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/09 11:47:08 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static	t_w3d		*init_values(t_w3d *w)
 }
 
 // https://github.com/Denis2222/wolf3d
+
 int		main(int ac, char **argv)
 {
 	t_w3d	*w;

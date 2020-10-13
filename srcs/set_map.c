@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/07 17:33:31 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:03:28 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void		draw_grids(t_w3d *w)
 	// int		color;
 	float	tmp_y;
 	// float	ray;
-	int		height;
-	int		start;
+	// int		height;
+	// int		start;
 
 	i = 0;
 	w->grid.angle = (w->cam.angle / 180.00) * M_PI;
@@ -52,9 +52,9 @@ static void		draw_grids(t_w3d *w)
 		w->grid.x += w->cam.posX;
 		w->grid.y += w->cam.posY;
 		calc_dist_init(w, i);
-		height = (int)(WIN_HEIGHT / w->side.perpwalldist);
-		start = -height / 2 + WIN_HEIGHT / 2;
-		draw_vert(w, i, start, height);
+		w->side.wallhit = 0;
+		draw_ray(w, i);
+		// draw_vert(w, i, start, height);
 		// ray = raycast(w, &color);
 		// put_pixel(w, color, i, ray);
 		i++;

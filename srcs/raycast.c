@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:38:09 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/08 23:50:57 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/09 11:56:51 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ void	calc_dist_init(t_w3d *w, int i)
 void	calc_dist(t_w3d *w)
 {	
 	if (w->side.side == 0)
-		w->side.perpwalldist = (w->side.mapx - w->side.lookposx +
-			(1 - w->side.stepx) / 2) / w->side.lookdirx;
+		w->side.perpwalldist = fabs((w->side.mapx - w->side.lookposx +
+			(1 - w->side.stepx) / 2) / w->side.lookdirx);
 	else
-		w->side.perpwalldist = (w->side.mapy - w->side.lookposy +
-			(1 - w->side.stepy) / 2) / w->side.lookdiry;
+		w->side.perpwalldist = fabs((w->side.mapy - w->side.lookposy + 
+			(1 - w->side.stepy) / 2) / w->side.lookdiry);
 }
