@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 20:20:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/13 17:19:57 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/15 15:42:20 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,12 @@ static void	ray_delimiter(t_w3d *w)
 	w->ray.wallx -= floor(w->ray.wallx);
 	w->ray.texx = (int)(w->ray.wallx * (double)64);
 	w->ray.texx = 64 - w->ray.texx - 1;
-	w->ray.y = 0; 
+	w->ray.y = 0;
 }
 
 void		draw_ray(t_w3d *w, int i)
 {
 	ray_delimiter(w);
 	w->ray.x = i;
-	w->side.buffer[i] = w->side.perpwalldist;
 	draw_ray_wall(w);
 }
