@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:19:05 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/15 15:42:28 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:02:11 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,17 @@ void	draw_dot(t_w3d *w, int x, int y, int color)
 	w->img.data[i + 2] = r;
 }
 
-int		get_color(t_w3d *w, int x, int y, int fade)
+int		get_color(t_img *img, int x, int y, int fade)
 {
 	int color;
 	int	c;
 
 	fade /= 8;
-	c = (y * w->side.buffer)
+	c = (y * img->width + x) * 4;
+	color = img->buffer[c];
+	if (color == -120 && img->buffer[c + 1] == 0 && img->buffer[c + 2] == -104)
+		return (256 * 256 * 256 + 256 * 256 + 256);
+	color += img->buffer[c + 1] * 256;
+	color += img->buffer[c + 2] * 256 * 256;
+	return (color);
 }

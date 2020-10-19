@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 15:16:11 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/13 17:03:28 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:45:38 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,26 @@ static void		draw_grids(t_w3d *w)
 	}
 }
 
-static void		draw_background(t_w3d *w)
-{
-	int i;
+// static void		draw_background(t_w3d *w)
+// {
+// 	int i;
 
-	i = 0;
-	while (i < (w->img.size * WIN_HEIGHT / 2))
-	{
-		w->img.data[i / 4] = 0xffffff;
-		i++;
-	}
-	while (i < (w->img.size * WIN_HEIGHT))
-	{
-		w->img.data[i / 4] =  0xDC143C;
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < (w->img.size * WIN_HEIGHT / 2))
+// 	{
+// 		w->img.data[i / 4] = 0xffffff;
+// 		i++;
+// 	}
+// 	while (i < (w->img.size * WIN_HEIGHT))
+// 	{
+// 		w->img.data[i / 4] =  0xDC143C;
+// 		i++;
+// 	}
+// }
 
 void		set_map(t_w3d *w)
 {
-	draw_background(w);
+	// draw_background(w);
 	draw_grids(w);
 	set_collision(w);
 	mlx_put_image_to_window(w->mlx.init, w->mlx.win, w->mlx.img, 0, 0);

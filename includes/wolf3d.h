@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/13 17:01:09 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/19 16:11:16 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ typedef struct	s_img
 	int		endian;
 	int		pxc;
 	int		x;
+	int		width;
+	int		height;
+	char	*buffer;
 }				t_img;
 
 typedef	struct	s_grid
@@ -114,7 +117,8 @@ typedef struct	s_side
 	double	deltadistX;
 	double	deltadistY;
 	double	perpwalldist;
-	double	buffer[WIN_WIDTH];
+	double	zbuffer[WIN_WIDTH];
+
 }				t_side;
 
 typedef struct	s_ray
@@ -141,7 +145,6 @@ typedef struct	s_ray
 	int		floortexy;
 }				t_ray;
 
-
 typedef struct	s_3d
 {
 	float	x;
@@ -149,10 +152,26 @@ typedef struct	s_3d
 	float	z;
 }				t_3d;
 
+typedef struct	s_coord
+{
+	double		x;
+	double		y;
+}				t_coord;
+
+typedef struct	s_player
+{
+	t_coord		*pos;
+	t_coord		*dir;
+	t_coord		*plane;
+}				t_player;
+
+
 typedef struct s_w3d
 {
+	t_player	*player;
 	t_mlx	mlx;
 	t_img	img;
+	t_img	*wall[10];
 	t_cam	cam;
 	t_grid	grid;
 	t_key	key;
@@ -161,8 +180,6 @@ typedef struct s_w3d
 	t_3d	cord;
 	t_ray	ray;
 }				t_w3d;
-
-
 
 void		draw_point(t_w3d *w, t_3d p, float height, int start);
 void		draw_vert(t_w3d *w, int x, int start, int height);
@@ -179,5 +196,7 @@ void		set_debug(t_w3d *w);
 void		import_textures(t_w3d *w);
 void		draw_point(t_w3d *w, t_3d t, float height, int start);
 void		draw_ray(t_w3d *w, int i);
+void		draw_dot(t_w3d *w, int x, int y, int color);
+int			get_color(t_img *img, int x, int y, int fade);
 
 #endif

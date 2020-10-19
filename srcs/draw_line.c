@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 20:20:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/15 15:42:20 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:51:05 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	draw_ray_wall(t_w3d *w)
 	{
 		d = w->ray.y * 256 - WIN_HEIGHT * 128 + w->ray.height * 128;
 		w->ray.texy = ((d * 64) / w->ray.height) / 256;
-		draw_dot(w, w->ray.x, w->ray.y, get_color(w->grid.matrix[wall + 1],
+		draw_dot(w, w->ray.x, w->ray.y, get_color(w->wall[wall + 1],
 			w->ray.texx, w->ray.texy, w->side.perpwalldist));
 		w->ray.y++;
 	}
@@ -118,9 +118,59 @@ static void	ray_delimiter(t_w3d *w)
 	w->ray.y = 0;
 }
 
+void		draw_floor_size(t_w3d *w)
+{
+	if (w->side.side == 0 && w->side.lookdirx > 0)
+	{
+		w->ray.floorxwall = w->side.mapx;
+		w->ray.floorywall = w->side.mapy + w->ray.wallx;
+	}
+	else if (w->side.side == 0 && w->side.lookdirx < 0)
+	{
+		w->ray.floorxwall = w->side.mapx + 1.0;
+		w->ray.floorywall = w->side.mapy + w->ray.wallx;
+	}
+	else if (w->side.side == 1 && w->side.lookdirx > 0)
+	{
+		w->ray.floorxwall = w->side.mapx + w->ray.wallx;
+		w->ray.floorywall = w->side.mapy;
+	}
+	else
+	{
+		w->ray.floorxwall = w->side.mapx + w->ray.wallx;
+		w->ray.floorywall = w->side.mapy + 1.0;
+	}
+	w->ray.distwall = w->side.perpwalldist;
+	w->ray.distplayer = 0.0;
+}
+
+void		draw_ray_floor(t_w3d *w)
+{
+	draw_floor_size(w);
+	while (w->ray.y < WIN_HEIGHT)
+	{
+		w->ray.currentdist = WIN_HEIGHT / (2.0 * w->ray.y - WIN_HEIGHT);
+		w->ray.weight = (w->ray.currentdist - w->ray.distplayer)
+			/ (w->ray.distwall - w->ray.distplayer);
+		w->ray.floorx = w->ray.weight * w->ray.floorxwall
+			+ (1.0 - w->ray.weight) * w->cam.posX;
+		w->ray.floory = w->ray.weight * w->ray.floorywall
+			+ (1.0 - w->ray.weight) * w->cam.posY;
+		w->ray.floortexx = (int)(w->ray.floorx * 64) % 64;
+		w->ray.floortexy = (int)(w->ray.floory * 64) % 64;
+		draw_dot(w, w->ray.x, w->ray.y,
+			get_color(w->wall[1], w->ray.floortexx, w->ray.floortexy, 0));
+		draw_dot(w, w->ray.x, w->ray.y,
+			get_color(w->wall[2], w->ray.floortexx, w->ray.floortexy, 0));
+		w->ray.y++;
+	}
+}
+
 void		draw_ray(t_w3d *w, int i)
 {
 	ray_delimiter(w);
 	w->ray.x = i;
+	w->side.zbuffer[i] = w->side.perpwalldist;
 	draw_ray_wall(w);
+	draw_ray_floor(w);
 }
