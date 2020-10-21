@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 20:20:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/19 17:51:05 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:26:42 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	draw_ray_wall(t_w3d *w)
 
 static void	ray_delimiter(t_w3d *w)
 {
-	w->ray.height = (int)(WIN_HEIGHT / w->side.perpwalldist);
+	w->ray.height = abs((int)(WIN_HEIGHT / w->side.perpwalldist));
 	w->ray.start = -w->ray.height / 2 + WIN_HEIGHT / 2;
 	if (w->ray.start < 0)
 		w->ray.start = 0;
