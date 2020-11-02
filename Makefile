@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/21 15:56:04 by jaleman           #+#    #+#              #
-#    Updated: 2020/10/15 15:19:26 by lsjoberg         ###   ########.fr        #
+#    Updated: 2020/10/28 14:57:29 by lsjoberg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ LIBFT_DIR = ./libft/
 MINLBX_DIR = ./minilibx/
 
 # Source files and object files
-SRC_FILES = main.c set_map.c raycast.c collision.c set_hooks.c set_movement.c \
-			debugger.c read_map.c set_texture.c draw_line.c color.c
+SRC_FILES = main.c draw_map.c read_map.c set_hooks.c set_movement.c \
+	set_texture.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # Paths

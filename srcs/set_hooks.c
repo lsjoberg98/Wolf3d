@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/26 13:14:16 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/26 15:17:03 by lsjoberg         ###   ########.fr       */
+/*   Created: 2020/10/24 22:12:18 by lsjoberg          #+#    #+#             */
+/*   Updated: 2020/10/29 15:55:33 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	key_release(int key, t_w3d *w)
 	else if (key == KEY_ANSI_E)
 		w->key.rotate_right = 0;
 	set_movement(w);
-	set_map(w);
+	draw_map(w);
 	return (0);
 }
 
@@ -56,13 +56,16 @@ static int	key_press(int key, t_w3d *w)
 	else if (key == KEY_ANSI_E)
 		w->key.rotate_right = 1;
 	set_movement(w);
-	set_map(w);
+	draw_map(w);
 	return (0);
 }
 
-void		set_hooks(t_w3d *w)
+void		render(t_w3d *w)
 {
+	mlx_hook(w->mlx.win, 17, 0, exit_hook, w);
 	mlx_hook(w->mlx.win, 2, 0, key_press, w);
 	mlx_hook(w->mlx.win, 3, 0, key_release, w);
-	mlx_hook(w->mlx.win, 17, 0, exit_hook, w);
+	draw_map(w);
+	mlx_put_image_to_window(w->mlx.init, w->mlx.win, w->mlx.img, 0, 0);
+	mlx_loop(w->mlx.init);
 }

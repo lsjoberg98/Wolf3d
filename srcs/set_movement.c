@@ -5,47 +5,77 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/26 13:00:55 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/08/27 14:30:33 by lsjoberg         ###   ########.fr       */
+/*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
+/*   Updated: 2020/10/29 18:31:24 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/wolf3d.h"
-
-static void	move_up(t_w3d *w, float speed)
-{
-	speed *= SPD_MOVE;
-	w->cam.moveX = w->cam.posX \
-					+ (speed * cos((w->cam.angle / 180.00) * M_PI));
-	w->cam.moveY = w->cam.posY \
-					+ (speed * sin((w->cam.angle / 180.00) * M_PI));
-}
+# include "../includes/wolf3d.h"
 
 static void	move_down(t_w3d *w, float speed)
 {
 	speed *= SPD_MOVE;
-	w->cam.moveX = w->cam.posX \
-					- (speed * cos((w->cam.angle / 180.00) * M_PI));
-	w->cam.moveY = w->cam.posY \
-					- (speed * sin((w->cam.angle / 180) * M_PI));
+	w->cam.posX -= speed * w->ray.dirx;
+	w->cam.posY -= speed * w->ray.diry;
+
+}
+
+static void	move_up(t_w3d *w, float speed)
+{
+	speed *= SPD_MOVE;
+	w->cam.posX += speed * w->ray.dirx;
+	w->cam.posY += speed * w->ray.diry;
+
+}
+
+// static void	move_left(t_w3d *w, float speed)
+// {
+// 	speed *= SPD_STRAFE;
+// 	w->cam.moveY = w->cam.posY \
+// 					+ (speed * cos((w->cam.angle / 180.00) * M_PI));
+// 	w->cam.moveX = w->cam.posX \
+// 					- (speed * sin((w->cam.angle / 180.00) * M_PI));
+// }
+
+static void	move_right(t_w3d *w, float speed)
+{
+	speed *= SPD_STRAFE;
+	w->cam.posX += speed * w->ray.planex;
+	w->cam.posY += speed * w->ray.planey;
 }
 
 static void	move_left(t_w3d *w, float speed)
 {
 	speed *= SPD_STRAFE;
-	w->cam.moveY = w->cam.posY \
-					+ (speed * cos((w->cam.angle / 180.00) * M_PI));
-	w->cam.moveX = w->cam.posX \
-					- (speed * sin((w->cam.angle / 180.00) * M_PI));
+	w->cam.posX -= speed * w->ray.planex;
+	w->cam.posY -= speed * w->ray.planey;
+
 }
 
-static void	move_right(t_w3d *w, float speed)
+void		rotate_left(t_w3d *w)
 {
-	speed *= SPD_STRAFE;
-	w->cam.moveX = w->cam.posX \
-					+ (speed * sin((w->cam.angle / 180.00) * M_PI));
-	w->cam.moveY = w->cam.posY \
-					- (speed * cos((w->cam.angle / 180.00) * M_PI));
+	double	rspeed;
+
+	rspeed = 0.06;
+	w->ray.diroldx = w->ray.dirx;
+	w->ray.dirx = w->ray.dirx * cos(rspeed) - w->ray.diry * sin(rspeed);
+	w->ray.diry = w->ray.diroldx * sin(rspeed) + w->ray.diry * cos(rspeed);
+	w->ray.planeoldx = w->ray.planex;
+	w->ray.planex = w->ray.planex * cos(rspeed) - w->ray.planey * sin(rspeed);
+	w->ray.planey = w->ray.planeoldx * sin(rspeed) + w->ray.planey * cos(rspeed);
+}
+
+void		rotate_right(t_w3d *w)
+{
+	double	rspeed;
+
+	rspeed = 0.06;
+	w->ray.diroldx = w->ray.dirx;
+	w->ray.dirx = w->ray.dirx * cos(-rspeed) - w->ray.diry * sin(-rspeed);
+	w->ray.diry = w->ray.diroldx * sin(-rspeed) + w->ray.diry * cos(-rspeed);
+	w->ray.planeoldx = w->ray.planex;
+	w->ray.planex = w->ray.planex * cos(-rspeed) - w->ray.planey * sin(-rspeed);
+	w->ray.planey = w->ray.planeoldx * sin(-rspeed) + w->ray.planey * cos(-rspeed);
 }
 
 void		set_movement(t_w3d *w)
@@ -62,7 +92,13 @@ void		set_movement(t_w3d *w)
 	if (w->key.move_right)
 		move_right(w, speed);
 	if (w->key.rotate_left == 1)
-		w->cam.angle += 1.50;
+		rotate_left(w);
 	if (w->key.rotate_right == 1)
-		w->cam.angle -= 1.50;
+		rotate_right(w);
+	set_collision(w);
+	mlx_destroy_image(w->mlx.init, w->mlx.img);
+	w->mlx.img = mlx_new_image(w->mlx.init, WIN_WIDTH, WIN_HEIGHT);
+	draw_background(w);
+	draw_map(w);
+	mlx_put_image_to_window(w->mlx.init, w->mlx.win, w->mlx.img, 0, 0);
 }

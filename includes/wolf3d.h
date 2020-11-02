@@ -3,41 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 13:34:43 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/21 17:01:19 by lsjoberg         ###   ########.fr       */
+/*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
+/*   Updated: 2020/11/02 17:10:05 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-# include <stdio.h> //remove this when done
-# include <fcntl.h> // added for fd args
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <pthread.h>
+# include <fcntl.h> // added for fd args
 
 # include "mlx.h"
 # include "libft.h"
 # include "keys.h"
 # include "mouse.h"
 
-# define WIN_WIDTH		(1024)
-# define WIN_HEIGHT		(768)
-# define TEX_WIDTH		(64)
-# define TEX_HEIGHT		(64)
+# define WIN_WIDTH		(5120 / 2)
+# define WIN_HEIGHT		(2880 / 2)
 
-# define A_ALIASING		(0.0050)
 # define SPD_WALK		(1.0000)
 # define SPD_SPRINT		(2.0000)
 # define SPD_MOVE		(0.2)
 # define SPD_STRAFE		(0.0750)
 
-# define FT_ABS(x)			(((x) < 0) ? -(x) : (x))
-# define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
-# define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+# define RED 16711680
+# define ORANGE 16742400
+
+# define THREADS		(8)
+
+# define XPM mlx_xpm_file_to_image
+# define XPMA mlx_get_data_addr
 
 typedef struct	s_mlx
 {
@@ -46,14 +47,14 @@ typedef struct	s_mlx
 	void	*img;
 }				t_mlx;
 
-typedef struct	s_cam
+typedef struct	s_text
 {
-	float	posX;
-	float	posY;
-	float	moveX;
-	float	moveY;
-	float	angle;
-}				t_cam;
+	void		*img;
+	int			*data;
+	int			endian;
+	int			sl;
+	int			bpp;
+}				t_text;
 
 typedef struct	s_key
 {
@@ -64,18 +65,17 @@ typedef struct	s_key
 	int		move_right;
 	int		rotate_left;
 	int		rotate_right;
+	int		texture;
 }				t_key;
 
 typedef struct	s_img
 {
 	int		*data;
-	int		size;
+	int		sl;
 	int		endian;
-	int		pxc;
+	int		bpp;
 	int		x;
-	int		width;
-	int		height;
-	char	*buffer;
+	int		xmax;
 }				t_img;
 
 typedef	struct	s_grid
@@ -88,14 +88,7 @@ typedef	struct	s_grid
 	int		**matrix;
 }				t_grid;
 
-typedef struct	s_text
-{
-	char	**wt;
-	char	**fl;
-	char	**cl;
-}				t_text;
-
-typedef struct	s_side
+typedef struct	s_ray
 {
 	double	dirx;
 	double	diry;
@@ -114,89 +107,53 @@ typedef struct	s_side
 	int		side;
 	double	sidedistx;
 	double	sidedisty;
-	double	deltadistX;
-	double	deltadistY;
-	double	perpwalldist;
-	double	zbuffer[WIN_WIDTH];
-
-}				t_side;
-
-typedef struct	s_ray
-{
-	int		height;
+	double	deltax;
+	double	deltay;
+	double	walldist;
+	int		wallheight;
 	int		start;
-	int		drawend;
-	int		x;
-	int		y;
-	double	wallx;
-	int		texx;
-	int		texy;
-
-	double	floorxwall;
-	double	floorywall;
-	double	distwall;
-	double	distplayer;
-	double	currentdist;
-	double	weight;
-	double	floorx;
-	double	floory;
-
-	int		floortexx;
-	int		floortexy;
+	int		end;
+	int		color;
+	int		n;
+	int			textx;
+	int			texty;
+	int			texture;
+	double	rspeed;
+	double	diroldx;
+	double	planeoldx;
+	double	wall;
 }				t_ray;
 
-typedef struct	s_3d
+typedef struct	s_cam
 {
-	float	x;
-	float	y;
-	float	z;
-}				t_3d;
+	float	posX;
+	float	posY;
+	float	moveX;
+	float	moveY;
+	float	angle;
+}				t_cam;
 
-typedef struct	s_coord
+typedef struct	s_w3d
 {
-	double		x;
-	double		y;
-}				t_coord;
-
-typedef struct	s_player
-{
-	t_coord		*pos;
-	t_coord		*dir;
-	t_coord		*plane;
-}				t_player;
-
-
-typedef struct s_w3d
-{
-	t_player	*player;
 	t_mlx	mlx;
+	t_text	text[3];
 	t_img	img;
-	t_img	*wall[10];
-	t_cam	cam;
 	t_grid	grid;
 	t_key	key;
-	t_text	tex;
-	t_side	side;
-	t_3d	cord;
+	t_cam	cam;
 	t_ray	ray;
 }				t_w3d;
 
-void		draw_point(t_w3d *w, t_3d p, float height, int start);
-void		draw_vert(t_w3d *w, int x, int start, int height);
-void		calc_dist(t_w3d *w);
-void		calc_dist_init(t_w3d *w, int i);
-int			ft_count_words(const char *str, char c);
-void		read_map(char *file_name, t_w3d *w);
-void		set_map(t_w3d *w);
-float		raycast(t_w3d *w, int *color);
-void		set_collision(t_w3d *w);
-void		set_movement(t_w3d *w);
-void		set_hooks(t_w3d *w);
-void		set_debug(t_w3d *w);
-void		import_textures(t_w3d *w);
-void		draw_point(t_w3d *w, t_3d t, float height, int start);
-void		draw_ray(t_w3d *w, int i);
-void		draw_dot(t_w3d *w, int x, int y, int color);
-int			get_color(t_img *img, int x, int y, int fade);
+void	*set_map(void *tab);
+void	read_map(char *file_name, t_w3d *w);
+void	set_movement(t_w3d *w);
+void	draw_map(t_w3d *w);
+void	render(t_w3d *w);
+void	load_textures(t_w3d *w);
+void	draw_walls(t_w3d *w);
+int		ft_count_words(const char *str, char c);
+void	set_collision(t_w3d *w);
+void	draw_background(t_w3d *w);
+void		rotate_right(t_w3d *w);
 
 #endif
