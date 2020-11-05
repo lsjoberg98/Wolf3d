@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/05 14:23:40 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:19:30 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define WIN_WIDTH		(5120 / 2)
 # define WIN_HEIGHT		(2880 / 2)
 
-# define SPD_WALK		(1.0000)
+# define SPD_WALK		(2.0000)
 # define SPD_SPRINT		(2.0000)
-# define SPD_MOVE		(0.2)
-# define SPD_STRAFE		(0.0750)
+# define SPD_MOVE		(0.3)
+# define SPD_STRAFE		(0.250)
 
 # define RED 16711680
 # define ORANGE 16742400
@@ -142,6 +142,7 @@ typedef struct	s_w3d
 	t_key	key;
 	t_cam	cam;
 	t_ray	ray;
+	int		check;
 }				t_w3d;
 
 void	*set_map(void *tab);

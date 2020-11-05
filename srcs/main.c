@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:06:37 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/02 15:24:30 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:11:40 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ static void	init_wolf(t_w3d *w)
 	render(w);
 }
 
+int		validate_map(char *str)
+{
+	if (ft_strcmp("maps/map2", str) == 0)
+		return (1);
+	else if (ft_strcmp("maps/map1", str) == 0)
+		return (1);
+	else
+		return (0);
+}
+
 int			main(int ac, char **av)
 {
 	t_w3d	*w;
@@ -73,6 +83,9 @@ int			main(int ac, char **av)
 		ft_error("Invalid arguments", -1);
 	if (!(w = (t_w3d *)malloc(sizeof(t_w3d))))
 		ft_error("Memory Allocation failed", 1);
+	w->check = 1 ? validate_map(av[1]) : 0;
+	if (w->check == 0)
+		ft_error("invalid map, try maps/map1", -1);
 	read_map(av[1], w);
 	w->mlx.init = mlx_init();
 	w->mlx.win = mlx_new_window(w->mlx.init, WIN_WIDTH, WIN_HEIGHT, \

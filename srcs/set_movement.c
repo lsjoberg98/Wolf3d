@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/05 16:48:06 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:19:48 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		rotate_left(t_w3d *w)
 {
 	double	rspeed;
 
-	rspeed = 0.06;
+	rspeed = 0.1;
 	w->ray.diroldx = w->ray.dirx;
 	w->ray.dirx = w->ray.dirx * cos(rspeed) - w->ray.diry * sin(rspeed);
 	w->ray.diry = w->ray.diroldx * sin(rspeed) + w->ray.diry * cos(rspeed);
@@ -60,7 +60,7 @@ void		rotate_right(t_w3d *w)
 {
 	double	rspeed;
 
-	rspeed = 0.06;
+	rspeed = 0.1;
 	w->ray.diroldx = w->ray.dirx;
 	w->ray.dirx = w->ray.dirx * cos(-rspeed) - w->ray.diry * sin(-rspeed);
 	w->ray.diry = w->ray.diroldx * sin(-rspeed) + w->ray.diry * cos(-rspeed);
