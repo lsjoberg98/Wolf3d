@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/02 17:10:05 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:23:40 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct	s_cam
 typedef struct	s_w3d
 {
 	t_mlx	mlx;
-	t_text	text[3];
+	t_text	text[4];
 	t_img	img;
 	t_grid	grid;
 	t_key	key;
