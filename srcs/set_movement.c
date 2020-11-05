@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/29 18:31:24 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:48:06 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ static void	move_up(t_w3d *w, float speed)
 	w->cam.posY += speed * w->ray.diry;
 
 }
-
-// static void	move_left(t_w3d *w, float speed)
-// {
-// 	speed *= SPD_STRAFE;
-// 	w->cam.moveY = w->cam.posY \
-// 					+ (speed * cos((w->cam.angle / 180.00) * M_PI));
-// 	w->cam.moveX = w->cam.posX \
-// 					- (speed * sin((w->cam.angle / 180.00) * M_PI));
-// }
 
 static void	move_right(t_w3d *w, float speed)
 {
