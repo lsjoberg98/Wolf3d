@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:06:37 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/05 17:11:40 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:12:01 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void		draw_background(t_w3d *w)
 	}
 	while (i < (w->img.sl * WIN_HEIGHT))
 	{
-		w->img.data[i / 4] =  0x696969;
+		w->img.data[i / 4] = 0x696969;
 		i++;
 	}
 }
 
-void	set_collision(t_w3d *w)
+void		set_collision(t_w3d *w)
 {
 	int x;
 	int y;
@@ -59,13 +59,13 @@ static void	init_wolf(t_w3d *w)
 	w->cam.angle = 110.00;
 	w->cam.moveX = 0.00;
 	w->cam.moveY = 0.00;
-	w->key.texture = 1;
+	w->key.texture = 0;
 	w->ray.rspeed = 0.06;
 	load_textures(w);
 	render(w);
 }
 
-int		validate_map(char *str)
+int			validate_map(char *str)
 {
 	if (ft_strcmp("maps/map2", str) == 0)
 		return (1);

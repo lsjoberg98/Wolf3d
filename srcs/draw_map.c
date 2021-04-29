@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 15:41:58 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/10/29 15:56:37 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:07:25 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 void	calc_direction(t_w3d *w)
 {
-	w->ray.deltax = sqrt(1 + (w->ray.lookdiry * w->ray.lookdiry) /
+	w->ray.dx = sqrt(1 + (w->ray.lookdiry * w->ray.lookdiry) /
 		(w->ray.lookdirx * w->ray.lookdirx));
-	w->ray.deltay = sqrt(1 + (w->ray.lookdirx * w->ray.lookdirx) /
+	w->ray.dy = sqrt(1 + (w->ray.lookdirx * w->ray.lookdirx) /
 		(w->ray.lookdiry * w->ray.lookdiry));
 	if (w->ray.lookdirx < 0)
 	{
 		w->ray.stepx = -1;
-		w->ray.sidedistx = (w->ray.lookposx - w->ray.mapx) * w->ray.deltax;
+		w->ray.sidedistx = (w->ray.lookposx - w->ray.mapx) * w->ray.dx;
 	}
 	else
 	{
 		w->ray.stepx = 1;
-		w->ray.sidedistx = (w->ray.mapx + 1.0 - w->ray.lookposx) * w->ray.deltax;
+		w->ray.sidedistx = (w->ray.mapx + 1.0 - w->ray.lookposx) * w->ray.dx;
 	}
 	if (w->ray.lookdiry < 0)
 	{
 		w->ray.stepy = -1;
-		w->ray.sidedisty = (w->ray.lookposy - w->ray.mapy) * w->ray.deltay;
+		w->ray.sidedisty = (w->ray.lookposy - w->ray.mapy) * w->ray.dy;
 	}
 	else
 	{
 		w->ray.stepy = 1;
-		w->ray.sidedisty = (w->ray.mapy + 1.0 - w->ray.lookposy) * w->ray.deltay;
+		w->ray.sidedisty = (w->ray.mapy + 1.0 - w->ray.lookposy) * w->ray.dy;
 	}
-	
 }
 
 void	calc_side(t_w3d *w)
@@ -48,13 +47,13 @@ void	calc_side(t_w3d *w)
 	{
 		if (w->ray.sidedistx < w->ray.sidedisty)
 		{
-			w->ray.sidedistx += w->ray.deltax;
+			w->ray.sidedistx += w->ray.dx;
 			w->ray.mapx += w->ray.stepx;
 			w->ray.side = 0;
 		}
 		else
 		{
-			w->ray.sidedisty += w->ray.deltay;
+			w->ray.sidedisty += w->ray.dy;
 			w->ray.mapy += w->ray.stepy;
 			w->ray.side = 1;
 		}
@@ -96,7 +95,7 @@ void	*set_map(void *tab)
 			w->ray.start = 0;
 		w->ray.end = w->ray.wallheight / 2 + WIN_HEIGHT / 2;
 		if (w->ray.end >= WIN_HEIGHT)
-			w->ray.end = WIN_HEIGHT -1;
+			w->ray.end = WIN_HEIGHT - 1;
 		draw_walls(w);
 		++w->img.x;
 	}

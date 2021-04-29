@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_movement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/05 17:19:48 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:13:32 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	move_down(t_w3d *w, float speed)
 	speed *= SPD_MOVE;
 	w->cam.posX -= speed * w->ray.dirx;
 	w->cam.posY -= speed * w->ray.diry;
-
 }
 
 static void	move_up(t_w3d *w, float speed)
@@ -25,7 +24,6 @@ static void	move_up(t_w3d *w, float speed)
 	speed *= SPD_MOVE;
 	w->cam.posX += speed * w->ray.dirx;
 	w->cam.posY += speed * w->ray.diry;
-
 }
 
 static void	move_right(t_w3d *w, float speed)
@@ -40,7 +38,6 @@ static void	move_left(t_w3d *w, float speed)
 	speed *= SPD_STRAFE;
 	w->cam.posX -= speed * w->ray.planex;
 	w->cam.posY -= speed * w->ray.planey;
-
 }
 
 void		rotate_left(t_w3d *w)

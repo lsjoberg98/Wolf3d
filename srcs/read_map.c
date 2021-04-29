@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 11:50:46 by khakala           #+#    #+#             */
-/*   Updated: 2020/08/31 13:19:36 by khakala          ###   ########.fr       */
+/*   Updated: 2021/04/29 16:13:03 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		get_height(char *file_name, t_w3d *w)
 {
-	int fd;
-	int height;
-	char *line;
-	int i;
+	int			i;
+	int			fd;
+	int			height;
+	char		*line;
 
 	fd = open(file_name, O_RDONLY);
 	height = 0;
@@ -33,7 +33,7 @@ int		get_height(char *file_name, t_w3d *w)
 		free(line);
 	}
 	close(fd);
-	return(height);
+	return (height);
 }
 
 int		ft_count_words(const char *str, char c)
@@ -73,9 +73,10 @@ void	fill_matrix(int *z_line, char *line)
 
 void	read_map(char *file_name, t_w3d *w)
 {
-	int i;
-	char *line;
-	int fd;
+	int		i;
+	int		fd;
+	char	*line;
+
 	w->grid.height = get_height(file_name, w);
 	w->grid.matrix = (int**)malloc(sizeof(int) * (w->grid.width + 1));
 	i = 0;
@@ -93,5 +94,4 @@ void	read_map(char *file_name, t_w3d *w)
 		free(line);
 	}
 	close(fd);
-
 }

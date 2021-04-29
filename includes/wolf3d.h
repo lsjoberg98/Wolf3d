@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2020/11/05 17:19:30 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:06:51 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 # include "keys.h"
 # include "mouse.h"
 
-# define WIN_WIDTH		(5120 / 2)
-# define WIN_HEIGHT		(2880 / 2)
+# define WIN_WIDTH		(1200)
+# define WIN_HEIGHT		(800)
 
-# define SPD_WALK		(2.0000)
-# define SPD_SPRINT		(2.0000)
-# define SPD_MOVE		(0.3)
+# define SPD_WALK		(0.5000)
+# define SPD_SPRINT		(0.5000)
+# define SPD_MOVE		(0.1)
 # define SPD_STRAFE		(0.250)
 
 # define RED 16711680
@@ -107,8 +107,8 @@ typedef struct	s_ray
 	int		side;
 	double	sidedistx;
 	double	sidedisty;
-	double	deltax;
-	double	deltay;
+	double	dx;
+	double	dy;
 	double	walldist;
 	int		wallheight;
 	int		start;
