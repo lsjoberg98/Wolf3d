@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/24 15:52:38 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:56:39 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 static void	move_down(t_w3d *w, float speed)
 {
 	speed *= SPD_MOVE;
-	w->cam.posX -= speed * w->ray.dirx;
-	w->cam.posY -= speed * w->ray.diry;
+	w->cam.pos_x -= speed * w->ray.dirx;
+	w->cam.pos_y -= speed * w->ray.diry;
 }
 
 static void	move_up(t_w3d *w, float speed)
 {
 	speed *= SPD_MOVE;
-	w->cam.posX += speed * w->ray.dirx;
-	w->cam.posY += speed * w->ray.diry;
+	w->cam.pos_x += speed * w->ray.dirx;
+	w->cam.pos_y += speed * w->ray.diry;
 }
 
 static void	move_right(t_w3d *w, float speed)
 {
 	speed *= SPD_STRAFE;
-	w->cam.posX += speed * w->ray.planex;
-	w->cam.posY += speed * w->ray.planey;
+	w->cam.pos_x += speed * w->ray.planex;
+	w->cam.pos_y += speed * w->ray.planey;
 }
 
 static void	move_left(t_w3d *w, float speed)
 {
 	speed *= SPD_STRAFE;
-	w->cam.posX -= speed * w->ray.planex;
-	w->cam.posY -= speed * w->ray.planey;
+	w->cam.pos_x -= speed * w->ray.planex;
+	w->cam.pos_y -= speed * w->ray.planey;
 }
 
 void		set_movement(t_w3d *w)

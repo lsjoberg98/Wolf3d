@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 22:12:18 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/04/29 16:00:08 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:47:34 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static int	key_press(int key, t_w3d *w)
 		w->key.move_down = 1;
 	else if (key == KEY_ANSI_D || key == KEY_RIGHTARROW)
 		w->key.move_right = 1;
-	else if (key == KEY_ANSI_Z)
-		w->key.debug = ((w->key.debug == 1) ? 0 : 1);
+	else if (key == KEY_ANSI_T)
+		w->key.texture = ((w->key.texture == 1) ? 0 : 1);
 	else if (key == KEY_ANSI_Q)
 		w->key.rotate_left = 1;
 	else if (key == KEY_ANSI_E)

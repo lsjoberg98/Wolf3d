@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:17:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/24 16:06:50 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:56:52 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static void	wall_texture(t_w3d *w)
 	{
 		w->ray.n = 1;
 		w->ray.wall = w->ray.lookposy + w->ray.lookdiry * w->ray.walldist;
-		if (w->ray.mapx - w->cam.posX > 0)
+		if (w->ray.mapx - w->cam.pos_x > 0)
 			w->ray.n = 3;
 	}
 	else
 	{
 		w->ray.n = 0;
 		w->ray.wall = w->ray.lookposx + w->ray.lookdirx * w->ray.walldist;
-		if (w->ray.mapy - w->cam.posY > 0)
+		if (w->ray.mapy - w->cam.pos_y > 0)
 			w->ray.n = 2;
 	}
 	w->ray.textx = (int)(w->ray.wall * (double)(64));

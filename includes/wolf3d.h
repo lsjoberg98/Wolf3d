@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/26 14:01:40 by khakala          ###   ########.fr       */
+/*   Updated: 2021/05/26 18:01:08 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
-# include <fcntl.h> // added for fd args
+# include <fcntl.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -29,7 +29,7 @@
 
 # define SPD_WALK		(0.5000)
 # define SPD_SPRINT		(0.5000)
-# define SPD_MOVE		(0.1)
+# define SPD_MOVE		(0.5)
 # define SPD_STRAFE		(0.250)
 
 # define RED 16711680
@@ -42,9 +42,9 @@
 
 typedef struct	s_mlx
 {
-	void	*init;
-	void	*win;
-	void	*img;
+	void		*init;
+	void		*win;
+	void		*img;
 }				t_mlx;
 
 typedef struct	s_text
@@ -58,106 +58,105 @@ typedef struct	s_text
 
 typedef struct	s_key
 {
-	int		debug;
-	int		move_up;
-	int		move_down;
-	int		move_left;
-	int		move_right;
-	int		rotate_left;
-	int		rotate_right;
-	int		texture;
+	int			move_up;
+	int			move_down;
+	int			move_left;
+	int			move_right;
+	int			rotate_left;
+	int			rotate_right;
+	int			texture;
 }				t_key;
 
 typedef struct	s_img
 {
-	int		*data;
-	int		sl;
-	int		endian;
-	int		bpp;
-	int		x;
-	int		xmax;
+	int			*data;
+	int			sl;
+	int			endian;
+	int			bpp;
+	int			x;
+	int			xmax;
 }				t_img;
 
 typedef	struct	s_grid
 {
-	float	x;
-	float	y;
-	float	angle;
-	int		height;
-	int		width;
-	int		**matrix;
-	int		row;
+	float		x;
+	float		y;
+	float		angle;
+	int			height;
+	int			width;
+	int			**matrix;
+	int			row;
 }				t_grid;
 
 typedef struct	s_ray
 {
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	double	camera;
-	double	lookposx;
-	double	lookposy;
-	double	lookdirx;
-	double	lookdiry;
-	int		mapx;
-	int		mapy;
-	int		stepx;
-	int		stepy;
-	int		wallhit;
-	int		side;
-	double	sidedistx;
-	double	sidedisty;
-	double	dx;
-	double	dy;
-	double	walldist;
-	int		wallheight;
-	int		start;
-	int		end;
-	int		color;
-	int		n;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		camera;
+	double		lookposx;
+	double		lookposy;
+	double		lookdirx;
+	double		lookdiry;
+	int			mapx;
+	int			mapy;
+	int			stepx;
+	int			stepy;
+	int			wallhit;
+	int			side;
+	double		sidedistx;
+	double		sidedisty;
+	double		dx;
+	double		dy;
+	double		walldist;
+	int			wallheight;
+	int			start;
+	int			end;
+	int			color;
+	int			n;
 	int			textx;
 	int			texty;
 	int			texture;
-	double	rspeed;
-	double	diroldx;
-	double	planeoldx;
-	double	wall;
+	double		rspeed;
+	double		diroldx;
+	double		planeoldx;
+	double		wall;
 }				t_ray;
 
 typedef struct	s_cam
 {
-	float	posX;
-	float	posY;
-	float	moveX;
-	float	moveY;
-	float	angle;
+	float		pos_x;
+	float		pos_y;
+	float		move_x;
+	float		move_y;
+	float		angle;
 }				t_cam;
 
 typedef struct	s_w3d
 {
-	t_mlx	mlx;
-	t_text	text[4];
-	t_img	img;
-	t_grid	grid;
-	t_key	key;
-	t_cam	cam;
-	t_ray	ray;
-	int		check;
+	t_mlx		mlx;
+	t_text		text[4];
+	t_img		img;
+	t_grid		grid;
+	t_key		key;
+	t_cam		cam;
+	t_ray		ray;
+	int			check;
 }				t_w3d;
 
-void	*set_map(void *tab);
-void	read_map(char *file_name, t_w3d *w);
-void	set_movement(t_w3d *w);
-void	draw_map(t_w3d *w);
-void	render(t_w3d *w);
-void	load_textures(t_w3d *w);
-void	draw_walls(t_w3d *w);
-int		ft_count_words(const char *str, char c);
-void	set_collision(t_w3d *w);
-void	draw_background(t_w3d *w);
-void	rotate_right(t_w3d *w);
-void	rotate_left(t_w3d *w);
-void	check_outer_bounder(int *z_line, int i, t_w3d *w);
+void			*set_map(void *tab);
+void			read_map(char *file_name, t_w3d *w);
+void			set_movement(t_w3d *w);
+void			draw_map(t_w3d *w);
+void			render(t_w3d *w);
+void			load_textures(t_w3d *w);
+void			draw_walls(t_w3d *w);
+int				ft_count_words(const char *str, char c);
+void			set_collision(t_w3d *w);
+void			draw_background(t_w3d *w);
+void			rotate_right(t_w3d *w);
+void			rotate_left(t_w3d *w);
+void			check_outer_bounder(int *z_line, int i, t_w3d *w);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:06:37 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/26 13:50:10 by khakala          ###   ########.fr       */
+/*   Updated: 2021/05/26 17:56:07 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,31 @@ void		set_collision(t_w3d *w)
 	int x;
 	int y;
 
-	x = (int)(w->cam.posX);
-	y = (int)(w->cam.posY);
+	x = (int)(w->cam.pos_x);
+	y = (int)(w->cam.pos_y);
 	if (w->grid.matrix[x][y] == 0)
 	{
-		w->cam.moveX = w->cam.posX;
-		w->cam.moveY = w->cam.posY;
+		w->cam.move_x = w->cam.pos_x;
+		w->cam.move_y = w->cam.pos_y;
 	}
 	if (w->grid.matrix[x][y] != 0)
 	{
-		w->cam.posX = w->cam.moveX;
-		w->cam.posY = w->cam.moveY;
+		w->cam.pos_x = w->cam.move_x;
+		w->cam.pos_y = w->cam.move_y;
 	}
 }
 
 static void	init_wolf(t_w3d *w)
 {
-	w->cam.posX = 3.0;
-	w->cam.posY = 2.0;
+	w->cam.pos_x = 3.0;
+	w->cam.pos_y = 2.0;
 	w->ray.dirx = -1;
 	w->ray.diry = 0;
 	w->ray.planex = 0;
 	w->ray.planey = 0.66;
 	w->cam.angle = 110.00;
-	w->cam.moveX = 0.00;
-	w->cam.moveY = 0.00;
+	w->cam.move_x = 0.00;
+	w->cam.move_y = 0.00;
 	w->key.texture = 1;
 	w->ray.rspeed = 0.06;
 	w->grid.row = 1;

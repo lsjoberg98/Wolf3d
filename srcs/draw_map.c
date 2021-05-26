@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 15:41:58 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/04/29 18:07:25 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 18:01:38 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	calc_side(t_w3d *w)
 void	draw_init(t_w3d *w)
 {
 	w->ray.camera = 2 * w->img.x / (double)WIN_WIDTH - 1;
-	w->ray.lookposx = w->cam.posX;
-	w->ray.lookposy = w->cam.posY;
+	w->ray.lookposx = w->cam.pos_x;
+	w->ray.lookposy = w->cam.pos_y;
 	w->ray.lookdirx = w->ray.dirx + w->ray.planex * w->ray.camera;
 	w->ray.lookdiry = w->ray.diry + w->ray.planey * w->ray.camera;
 	w->ray.mapx = (int)w->ray.lookposx;
