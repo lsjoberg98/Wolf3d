@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 11:50:46 by khakala           #+#    #+#             */
-/*   Updated: 2021/05/26 14:11:41 by khakala          ###   ########.fr       */
+/*   Updated: 2021/05/26 14:24:10 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	fill_matrix(int *z_line, char *line, t_w3d *w)
 
 void	check_outer_bounder(int *z_line, int i, t_w3d *w)
 {
-	if (w->grid.row == 0 || (w->grid.height -1) == w->grid.row)
+	if (w->grid.row == 0 || (w->grid.height - 1) == w->grid.row)
 		z_line[i] = 1;
-	if (i == 0 || (w->grid.width -1) == i)
+	if (i == 0 || (w->grid.width - 1) == i)
 		z_line[i] = 1;
 }
 
