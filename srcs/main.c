@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:06:37 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/04/29 16:12:01 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:26:06 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	init_wolf(t_w3d *w)
 	w->cam.angle = 110.00;
 	w->cam.moveX = 0.00;
 	w->cam.moveY = 0.00;
-	w->key.texture = 0;
+	w->key.texture = 1;
 	w->ray.rspeed = 0.06;
 	load_textures(w);
 	render(w);

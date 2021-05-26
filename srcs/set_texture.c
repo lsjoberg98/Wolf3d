@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:17:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/04/29 18:09:03 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:06:50 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		load_textures(t_w3d *w)
 		&w->text[3].sl, &w->text[3].endian));
 }
 
-static void	wall_texture(t_w3d *w, int tmp)
+static void	wall_texture(t_w3d *w)
 {
 	if (w->ray.side == 0)
 	{
@@ -53,17 +53,6 @@ static void	wall_texture(t_w3d *w, int tmp)
 	if (w->ray.side == 0 && w->ray.lookdirx > 0)
 		w->ray.textx = 64 - w->ray.textx - 1;
 	w->ray.textx = abs(w->ray.textx);
-	while (++tmp <= w->ray.end)
-	{
-		if (w->img.x < WIN_WIDTH && tmp < WIN_HEIGHT)
-		{
-			w->ray.texty = abs((((tmp * 256 - WIN_HEIGHT * 128 +
-				w->ray.wallheight * 128) * 64) / w->ray.wallheight) / 256);
-		w->img.data[WIN_WIDTH * tmp + w->img.x] =
-			w->text[w->ray.n].data[w->ray.texty % 16 * w->text[w->ray.n].sl +
-				w->ray.textx % 64 * w->text[w->ray.n].bpp / 8];
-		}
-	}
 }
 
 void		draw_walls(t_w3d *w)
@@ -81,5 +70,45 @@ void		draw_walls(t_w3d *w)
 			w->img.data[WIN_WIDTH * tmp + w->img.x] = w->ray.color;
 	}
 	else
-		wall_texture(w, tmp);
+		wall_texture(w);
+	while (++tmp <= w->ray.end)
+	{
+		if (w->img.x < WIN_WIDTH && tmp < WIN_HEIGHT)
+		{
+			w->ray.texty = abs((((tmp * 256 - WIN_HEIGHT * 128 +
+				w->ray.wallheight * 128) * 64) / w->ray.wallheight) / 256);
+			w->img.data[WIN_WIDTH * tmp + w->img.x] =
+			w->text[w->ray.n].data[w->ray.texty % 16 * w->text[w->ray.n].sl +
+				w->ray.textx % 64 * w->text[w->ray.n].bpp / 8];
+		}
+	}
+}
+
+void		rotate_right(t_w3d *w)
+{
+	double	rspeed;
+
+	rspeed = 0.1;
+	w->ray.diroldx = w->ray.dirx;
+	w->ray.dirx = w->ray.dirx * cos(-rspeed) - w->ray.diry * sin(-rspeed);
+	w->ray.diry = w->ray.diroldx * sin(-rspeed) + w->ray.diry * cos(-rspeed);
+	w->ray.planeoldx = w->ray.planex;
+	w->ray.planex = w->ray.planex * cos(-rspeed) - w->ray.planey * sin(-rspeed);
+	w->ray.planey = w->ray.planeoldx * sin(-rspeed) +
+		w->ray.planey * cos(-rspeed);
+}
+
+void		rotate_left(t_w3d *w)
+{
+	double	rspeed;
+
+	rspeed = 0.1;
+	w->ray.diroldx = w->ray.dirx;
+	w->ray.dirx = w->ray.dirx * cos(rspeed) - w->ray.diry * sin(rspeed);
+	w->ray.diry = w->ray.diroldx * sin(rspeed) +
+		w->ray.diry * cos(rspeed);
+	w->ray.planeoldx = w->ray.planex;
+	w->ray.planex = w->ray.planex * cos(rspeed) - w->ray.planey * sin(rspeed);
+	w->ray.planey = w->ray.planeoldx * sin(rspeed) +
+		w->ray.planey * cos(rspeed);
 }

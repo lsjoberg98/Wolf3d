@@ -6,11 +6,11 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/04/29 18:13:32 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/24 15:52:38 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/wolf3d.h"
+#include "../includes/wolf3d.h"
 
 static void	move_down(t_w3d *w, float speed)
 {
@@ -40,32 +40,6 @@ static void	move_left(t_w3d *w, float speed)
 	w->cam.posY -= speed * w->ray.planey;
 }
 
-void		rotate_left(t_w3d *w)
-{
-	double	rspeed;
-
-	rspeed = 0.1;
-	w->ray.diroldx = w->ray.dirx;
-	w->ray.dirx = w->ray.dirx * cos(rspeed) - w->ray.diry * sin(rspeed);
-	w->ray.diry = w->ray.diroldx * sin(rspeed) + w->ray.diry * cos(rspeed);
-	w->ray.planeoldx = w->ray.planex;
-	w->ray.planex = w->ray.planex * cos(rspeed) - w->ray.planey * sin(rspeed);
-	w->ray.planey = w->ray.planeoldx * sin(rspeed) + w->ray.planey * cos(rspeed);
-}
-
-void		rotate_right(t_w3d *w)
-{
-	double	rspeed;
-
-	rspeed = 0.1;
-	w->ray.diroldx = w->ray.dirx;
-	w->ray.dirx = w->ray.dirx * cos(-rspeed) - w->ray.diry * sin(-rspeed);
-	w->ray.diry = w->ray.diroldx * sin(-rspeed) + w->ray.diry * cos(-rspeed);
-	w->ray.planeoldx = w->ray.planex;
-	w->ray.planex = w->ray.planex * cos(-rspeed) - w->ray.planey * sin(-rspeed);
-	w->ray.planey = w->ray.planeoldx * sin(-rspeed) + w->ray.planey * cos(-rspeed);
-}
-
 void		set_movement(t_w3d *w)
 {
 	float	speed;
@@ -75,7 +49,7 @@ void		set_movement(t_w3d *w)
 		move_up(w, speed);
 	if (w->key.move_down == 1)
 		move_down(w, speed);
-	 if (w->key.move_left == 1)
+	if (w->key.move_left == 1)
 		move_left(w, speed);
 	if (w->key.move_right)
 		move_right(w, speed);

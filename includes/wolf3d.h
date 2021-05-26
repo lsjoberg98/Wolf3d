@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/04/29 18:06:51 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:05:36 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void	draw_walls(t_w3d *w);
 int		ft_count_words(const char *str, char c);
 void	set_collision(t_w3d *w);
 void	draw_background(t_w3d *w);
-void		rotate_right(t_w3d *w);
+void	rotate_right(t_w3d *w);
+void	rotate_left(t_w3d *w);
 
 #endif
