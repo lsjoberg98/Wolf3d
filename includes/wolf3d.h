@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/24 16:05:36 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:01:40 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef	struct	s_grid
 	int		height;
 	int		width;
 	int		**matrix;
+	int		row;
 }				t_grid;
 
 typedef struct	s_ray
@@ -157,5 +158,6 @@ void	set_collision(t_w3d *w);
 void	draw_background(t_w3d *w);
 void	rotate_right(t_w3d *w);
 void	rotate_left(t_w3d *w);
+void	check_outer_bounder(int *z_line, int i, t_w3d *w);
 
 #endif

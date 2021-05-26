@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:06:37 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/17 16:26:06 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 13:50:10 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	init_wolf(t_w3d *w)
 	w->cam.moveY = 0.00;
 	w->key.texture = 1;
 	w->ray.rspeed = 0.06;
+	w->grid.row = 1;
 	load_textures(w);
 	render(w);
 }

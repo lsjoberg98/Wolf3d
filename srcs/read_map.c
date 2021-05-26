@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khakala <khakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 11:50:46 by khakala           #+#    #+#             */
-/*   Updated: 2021/05/24 15:52:27 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:11:41 by khakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_count_words(const char *str, char c)
 	return (count);
 }
 
-void	fill_matrix(int *z_line, char *line)
+void	fill_matrix(int *z_line, char *line, t_w3d *w)
 {
 	char	**nums;
 	int		i;
@@ -65,10 +65,20 @@ void	fill_matrix(int *z_line, char *line)
 	while (nums[i])
 	{
 		z_line[i] = ft_atoi(nums[i]);
+		check_outer_bounder(z_line, i, w);
 		free(nums[i]);
 		i++;
 	}
+	w->grid.row++;
 	free(nums);
+}
+
+void	check_outer_bounder(int *z_line, int i, t_w3d *w)
+{
+	if (w->grid.row == 0 || (w->grid.height -1) == w->grid.row)
+		z_line[i] = 1;
+	if (i == 0 || (w->grid.width -1) == i)
+		z_line[i] = 1;
 }
 
 void	read_map(char *file_name, t_w3d *w)
@@ -88,7 +98,7 @@ void	read_map(char *file_name, t_w3d *w)
 	{
 		if (i < w->grid.height)
 		{
-			fill_matrix(w->grid.matrix[i], line);
+			fill_matrix(w->grid.matrix[i], line, w);
 			i++;
 		}
 		free(line);
