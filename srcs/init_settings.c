@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 18:37:33 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/07/20 18:51:54 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/07/20 19:20:52 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	set_collision(t_w3d *w)
 
 void	init_wolf(t_w3d *w)
 {
-	w->cam.pos_x = 3.01;
-	w->cam.pos_y = 2.01;
+	w->cam.pos_x = 3.05;
+	w->cam.pos_y = 2.05;
 	w->ray.dirx = -1;
 	w->ray.diry = 0;
 	w->ray.planex = 0;
