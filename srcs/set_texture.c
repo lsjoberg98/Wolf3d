@@ -6,29 +6,33 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:17:03 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/26 17:56:52 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/07/20 19:11:38 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void		load_textures(t_w3d *w)
+void	load_textures(t_w3d *w)
 {
 	int	height;
 	int	width;
 
-	w->text[0].img = XPM(w->mlx.init, "tex/tnt_side.xpm", &width, &height);
-	w->text[0].data = (int *)(XPMA(w->text[0].img, &w->text[0].bpp,
-		&w->text[0].sl, &w->text[0].endian));
-	w->text[1].img = XPM(w->mlx.init, "tex/gold_ore.xpm", &width, &height);
-	w->text[1].data = (int *)(XPMA(w->text[1].img, &w->text[1].bpp,
-		&w->text[1].sl, &w->text[1].endian));
-	w->text[2].img = XPM(w->mlx.init, "tex/mossy.xpm", &width, &height);
-	w->text[2].data = (int *)(XPMA(w->text[2].img, &w->text[2].bpp,
-		&w->text[2].sl, &w->text[2].endian));
-	w->text[3].img = XPM(w->mlx.init, "tex/diamond_ore.xpm", &width, &height);
-	w->text[3].data = (int *)(XPMA(w->text[3].img, &w->text[3].bpp,
-		&w->text[3].sl, &w->text[3].endian));
+	w->text[0].img = mlx_xpm_file_to_image(w->mlx.init, "tex/tnt_side.xpm",
+			&width, &height);
+	w->text[0].data = (int *)(mlx_get_data_addr(w->text[0].img,
+				&w->text[0].bpp, &w->text[0].sl, &w->text[0].endian));
+	w->text[1].img = mlx_xpm_file_to_image(w->mlx.init, "tex/gold_ore.xpm",
+			&width, &height);
+	w->text[1].data = (int *)(mlx_get_data_addr(w->text[1].img, &w->text[1].bpp,
+				&w->text[1].sl, &w->text[1].endian));
+	w->text[2].img = mlx_xpm_file_to_image(w->mlx.init, "tex/mossy.xpm",
+			&width, &height);
+	w->text[2].data = (int *)(mlx_get_data_addr(w->text[2].img, &w->text[2].bpp,
+				&w->text[2].sl, &w->text[2].endian));
+	w->text[3].img = mlx_xpm_file_to_image(w->mlx.init, "tex/diamond_ore.xpm",
+			&width, &height);
+	w->text[3].data = (int *)(mlx_get_data_addr(w->text[3].img, &w->text[3].bpp,
+				&w->text[3].sl, &w->text[3].endian));
 }
 
 static void	wall_texture(t_w3d *w)
@@ -55,7 +59,7 @@ static void	wall_texture(t_w3d *w)
 	w->ray.textx = abs(w->ray.textx);
 }
 
-void		draw_walls(t_w3d *w)
+void	draw_walls(t_w3d *w)
 {
 	int	tmp;
 
@@ -71,20 +75,10 @@ void		draw_walls(t_w3d *w)
 	}
 	else
 		wall_texture(w);
-	while (++tmp <= w->ray.end)
-	{
-		if (w->img.x < WIN_WIDTH && tmp < WIN_HEIGHT)
-		{
-			w->ray.texty = abs((((tmp * 256 - WIN_HEIGHT * 128 +
-				w->ray.wallheight * 128) * 64) / w->ray.wallheight) / 256);
-			w->img.data[WIN_WIDTH * tmp + w->img.x] =
-			w->text[w->ray.n].data[w->ray.texty % 16 * w->text[w->ray.n].sl +
-				w->ray.textx % 64 * w->text[w->ray.n].bpp / 8];
-		}
-	}
+	calc_wall(w, tmp);
 }
 
-void		rotate_right(t_w3d *w)
+void	rotate_right(t_w3d *w)
 {
 	double	rspeed;
 
@@ -94,21 +88,21 @@ void		rotate_right(t_w3d *w)
 	w->ray.diry = w->ray.diroldx * sin(-rspeed) + w->ray.diry * cos(-rspeed);
 	w->ray.planeoldx = w->ray.planex;
 	w->ray.planex = w->ray.planex * cos(-rspeed) - w->ray.planey * sin(-rspeed);
-	w->ray.planey = w->ray.planeoldx * sin(-rspeed) +
-		w->ray.planey * cos(-rspeed);
+	w->ray.planey = w->ray.planeoldx * sin(-rspeed)
+		+ w->ray.planey * cos(-rspeed);
 }
 
-void		rotate_left(t_w3d *w)
+void	rotate_left(t_w3d *w)
 {
 	double	rspeed;
 
 	rspeed = 0.1;
 	w->ray.diroldx = w->ray.dirx;
 	w->ray.dirx = w->ray.dirx * cos(rspeed) - w->ray.diry * sin(rspeed);
-	w->ray.diry = w->ray.diroldx * sin(rspeed) +
-		w->ray.diry * cos(rspeed);
+	w->ray.diry = w->ray.diroldx * sin(rspeed)
+		+ w->ray.diry * cos(rspeed);
 	w->ray.planeoldx = w->ray.planex;
 	w->ray.planex = w->ray.planex * cos(rspeed) - w->ray.planey * sin(rspeed);
-	w->ray.planey = w->ray.planeoldx * sin(rspeed) +
-		w->ray.planey * cos(rspeed);
+	w->ray.planey = w->ray.planeoldx * sin(rspeed)
+		+ w->ray.planey * cos(rspeed);
 }

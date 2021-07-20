@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 16:12:56 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/26 17:56:39 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/07/20 18:08:48 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	move_left(t_w3d *w, float speed)
 	w->cam.pos_y -= speed * w->ray.planey;
 }
 
-void		set_movement(t_w3d *w)
+void	set_movement(t_w3d *w)
 {
 	float	speed;
 

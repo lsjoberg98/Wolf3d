@@ -25,7 +25,7 @@ MINLBX_DIR = ./minilibx/
 
 # Source files and object files
 SRC_FILES = main.c draw_map.c read_map.c set_hooks.c set_movement.c \
-	set_texture.c
+	set_texture.c init_settings.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # Paths

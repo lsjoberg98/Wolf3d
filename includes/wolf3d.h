@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/26 18:09:03 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/07/20 19:11:47 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 
 # include "mlx.h"
 # include "libft.h"
-# include "keys.h"
-# include "mouse.h"
 
 # define WIN_WIDTH		(1200)
 # define WIN_HEIGHT		(800)
@@ -30,22 +28,33 @@
 # define SPD_MOVE		(0.5)
 # define SPD_STRAFE		(0.250)
 
+# define KEY_ANSI_A			 		(0)
+# define KEY_ANSI_S			 		(1)
+# define KEY_ANSI_D			 		(2)
+# define KEY_ANSI_W			 		(13)
+# define KEY_ANSI_E			 		(14)
+# define KEY_ANSI_Q			 		(12)
+
+# define KEY_LEFTARROW		  		(123)
+# define KEY_RIGHTARROW		 		(124)
+# define KEY_DOWNARROW		  		(125)
+# define KEY_UPARROW				(126)
+
+# define KEY_ESCAPE			 		(53)
+
 # define RED 16711680
 # define ORANGE 16742400
 
 # define THREADS		(8)
 
-# define XPM mlx_xpm_file_to_image
-# define XPMA mlx_get_data_addr
-
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void		*init;
 	void		*win;
 	void		*img;
 }				t_mlx;
 
-typedef struct	s_text
+typedef struct s_text
 {
 	void		*img;
 	int			*data;
@@ -54,7 +63,7 @@ typedef struct	s_text
 	int			bpp;
 }				t_text;
 
-typedef struct	s_key
+typedef struct s_key
 {
 	int			move_up;
 	int			move_down;
@@ -65,7 +74,7 @@ typedef struct	s_key
 	int			texture;
 }				t_key;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	int			*data;
 	int			sl;
@@ -75,7 +84,7 @@ typedef struct	s_img
 	int			xmax;
 }				t_img;
 
-typedef	struct	s_grid
+typedef struct s_grid
 {
 	float		x;
 	float		y;
@@ -86,7 +95,7 @@ typedef	struct	s_grid
 	int			row;
 }				t_grid;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double		dirx;
 	double		diry;
@@ -122,7 +131,7 @@ typedef struct	s_ray
 	double		wall;
 }				t_ray;
 
-typedef struct	s_cam
+typedef struct s_cam
 {
 	float		pos_x;
 	float		pos_y;
@@ -131,7 +140,7 @@ typedef struct	s_cam
 	float		angle;
 }				t_cam;
 
-typedef struct	s_w3d
+typedef struct s_w3d
 {
 	t_mlx		mlx;
 	t_text		text[4];
@@ -143,6 +152,7 @@ typedef struct	s_w3d
 	int			check;
 }				t_w3d;
 
+void			draw_background(t_w3d *w);
 void			*set_map(void *tab);
 void			read_map(char *file_name, t_w3d *w);
 void			set_movement(t_w3d *w);
@@ -156,5 +166,8 @@ void			draw_background(t_w3d *w);
 void			rotate_right(t_w3d *w);
 void			rotate_left(t_w3d *w);
 void			check_outer_bounder(int *z_line, int i, t_w3d *w);
+void			calc_wall(t_w3d *w, int tmp);
+int				validate_map(char *str);
+void			init_wolf(t_w3d *w);
 
 #endif

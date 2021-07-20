@@ -6,13 +6,13 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 11:50:46 by khakala           #+#    #+#             */
-/*   Updated: 2021/05/26 14:24:10 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/07/20 18:02:36 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-int		get_height(char *file_name, t_w3d *w)
+int	get_height(char *file_name, t_w3d *w)
 {
 	int			i;
 	int			fd;
@@ -36,10 +36,10 @@ int		get_height(char *file_name, t_w3d *w)
 	return (height);
 }
 
-int		ft_count_words(const char *str, char c)
+int	ft_count_words(const char *str, char c)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	i = 0;
 	count = 0;
@@ -88,10 +88,10 @@ void	read_map(char *file_name, t_w3d *w)
 	char	*line;
 
 	w->grid.height = get_height(file_name, w);
-	w->grid.matrix = (int**)malloc(sizeof(int) * (w->grid.width + 1));
+	w->grid.matrix = (int **)malloc(sizeof(int) * (w->grid.width + 1));
 	i = 0;
 	while (i <= w->grid.height)
-		w->grid.matrix[i++] = (int*)malloc(sizeof(int) * (w->grid.width + 1));
+		w->grid.matrix[i++] = (int *)malloc(sizeof(int) * (w->grid.width + 1));
 	fd = open(file_name, O_RDONLY);
 	i = 0;
 	while (get_next_line(fd, &line) > 0)

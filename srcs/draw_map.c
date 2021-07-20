@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 15:41:58 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/05/26 18:01:38 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/07/20 17:45:04 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	calc_direction(t_w3d *w)
 {
-	w->ray.dx = sqrt(1 + (w->ray.lookdiry * w->ray.lookdiry) /
-		(w->ray.lookdirx * w->ray.lookdirx));
-	w->ray.dy = sqrt(1 + (w->ray.lookdirx * w->ray.lookdirx) /
-		(w->ray.lookdiry * w->ray.lookdiry));
+	w->ray.dx = sqrt(1 + (w->ray.lookdiry * w->ray.lookdiry)
+			/ (w->ray.lookdirx * w->ray.lookdirx));
+	w->ray.dy = sqrt(1 + (w->ray.lookdirx * w->ray.lookdirx)
+			/ (w->ray.lookdiry * w->ray.lookdiry));
 	if (w->ray.lookdirx < 0)
 	{
 		w->ray.stepx = -1;
@@ -74,18 +74,18 @@ void	draw_init(t_w3d *w)
 	calc_direction(w);
 	calc_side(w);
 	if (w->ray.side == 0)
-		w->ray.walldist = (w->ray.mapx - w->ray.lookposx +
-			(1 - w->ray.stepx) / 2) / w->ray.lookdirx;
+		w->ray.walldist = (w->ray.mapx - w->ray.lookposx
+				+ (1 - w->ray.stepx) / 2) / w->ray.lookdirx;
 	else
-		w->ray.walldist = (w->ray.mapy - w->ray.lookposy +
-			(1 - w->ray.stepy) / 2) / w->ray.lookdiry;
+		w->ray.walldist = (w->ray.mapy - w->ray.lookposy
+				+ (1 - w->ray.stepy) / 2) / w->ray.lookdiry;
 }
 
 void	*set_map(void *tab)
 {
 	t_w3d	*w;
 
-	w = (t_w3d*)tab;
+	w = (t_w3d *)tab;
 	while (w->img.x < w->img.xmax)
 	{
 		draw_init(w);
@@ -111,7 +111,7 @@ void	draw_map(t_w3d *w)
 	i = 0;
 	while (i < THREADS)
 	{
-		ft_memcpy((void*)&t[i], (void*)w, sizeof(t_w3d));
+		ft_memcpy((void *)&t[i], (void *)w, sizeof(t_w3d));
 		t[i].img.x = i * (WIN_WIDTH / THREADS);
 		t[i].img.xmax = (i + 1) * (WIN_WIDTH / THREADS);
 		pthread_create(&tab[i], NULL, set_map, &t[i]);
