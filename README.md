@@ -6,8 +6,8 @@ Wolfenstein 3D maze
 # Raycasting game
 
 **Raycasting game inspired by Wolfenstein 3D**\
-Hive Helsinki graphical project. The code is written in accordance with The Norm (Hive coding style).\
-Besides the raycasting algorithm itself, the project includes most of the parsing and an error handling manager for invalid input data.\
+Hive Helsinki graphical project. The code is written in accordance with The Norm (Hive coding style).
+Besides the raycasting algorithm itself, the project includes most of the parsing and an error handling manager for invalid input data.
 
 Works on Mac OS only.
 
