@@ -17,7 +17,7 @@ Works on Mac OS only.
 * `./Wolf3d maps/map1`
 
 **Keys:**
-* `W | S - Move forward and backwards`
+* `W | S  - Move forward and backwards`
 * `Arrows - moving and look left/right`
-* `A | D - Strafe left/right`
-* `ESC - Quit`
+* `A | D  - Strafe left/right`
+* `ESC    - Quit`
