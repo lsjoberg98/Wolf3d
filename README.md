@@ -17,6 +17,19 @@ Works on Mac OS only.
 * `make`
 * `./Wolf3d maps/map1`
 
+**Map:**
+The game reads a text file with '1' being a wall and '0' being a walkable square.\
+These files can be modified without re-compiling the program. \
+See example below.
+
+* `1 1 1 1 1 1 1 1 1 1`
+* `1 0 0 0 0 0 0 0 0 1`
+* `1 0 0 0 1 0 1 1 0 1`
+* `1 0 1 1 1 0 1 0 0 1`
+* `1 0 0 0 0 0 0 0 0 1`
+* `1 1 1 1 1 1 1 1 1 1`
+
+
 **Keys:**
 * `W | S  - Move forward and backwards`
 * `Arrows - moving and look left/right`
