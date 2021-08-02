@@ -18,6 +18,7 @@ Works on Mac OS only.
 * `./Wolf3d maps/map1`
 
 **Map:**
+
 The game reads a text file with '1' being a wall and '0' being a walkable square.\
 These files can be modified without re-compiling the program. \
 See example below.
