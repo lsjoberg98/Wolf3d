@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:59:12 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/07/20 19:11:47 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/08/02 17:13:45 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIN_WIDTH		(1200)
 # define WIN_HEIGHT		(800)
 
-# define SPD_MOVE		(0.5)
+# define SPD_MOVE		(0.25)
 # define SPD_STRAFE		(0.250)
 
 # define KEY_ANSI_A			 		(0)

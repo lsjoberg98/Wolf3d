@@ -6,7 +6,7 @@
 /*   By: lsjoberg <lsjoberg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:06:37 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/07/20 18:40:47 by lsjoberg         ###   ########.fr       */
+/*   Updated: 2021/08/02 15:54:17 by lsjoberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(int ac, char **av)
 	if (w->check == 0)
 		ft_error("invalid map, try maps/map1", -1);
 	read_map(av[1], w);
+	if (w->grid.matrix[2][2] != 0)
+		ft_error("invalid map, No spawn point", -1);
 	w->mlx.init = mlx_init();
 	w->mlx.win = mlx_new_window(w->mlx.init, WIN_WIDTH, WIN_HEIGHT, \
 		"Wolf3D");
